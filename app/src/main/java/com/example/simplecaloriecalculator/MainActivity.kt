@@ -1,7 +1,8 @@
-package com.hfad.simplecaloriecalculator
+package com.example.simplecaloriecalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.hfad.simplecaloriecalculator.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
