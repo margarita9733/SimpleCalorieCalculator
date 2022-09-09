@@ -1,15 +1,21 @@
 package com.example.simplecaloriecalculator
 
+
+
+
 //БЖУК на 1 грамм продукта, вес порции в граммах
 data class Product(
-    var proteins: Int = 0,
-    var fats: Int = 0,
-    var carbs: Int = 0,
-    var calories: Int =0,
-    var portionWeight: Int = 0
+    var name: String = "",
+    var proteins: Double = 0.0,
+    var fats: Double = 0.0,
+    var carbs: Double = 0.0,
+    var calories: Double = 0.0,
+    var portionWeight: Double = 0.0
 ) {
-    fun proteinsPerPortion(): Int = proteins * portionWeight
-    fun fatsPerPortion(): Int = fats * portionWeight
-    fun carbsPerPortion() :Int = carbs * portionWeight
-    fun caloriesPerPortion(): Int = calories * portionWeight
+    var proteinsPerPortion = proteins * portionWeight
+    var fatsPerPortion = fats * portionWeight
+    var carbsPerPortion = carbs * portionWeight
+    var caloriesPerPortion =  calories * portionWeight
+
+
 }  
