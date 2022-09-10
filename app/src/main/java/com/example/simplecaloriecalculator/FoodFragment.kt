@@ -22,17 +22,21 @@ class FoodFragment : Fragment() {
 
         val viewModel = FoodViewModel()
 
-        val adapter = ProductItemAdapter()
+        val adapter = ProductItemAdapter { product ->
+            viewModel.removeFromList(product)
+
+        }
         binding.productsList.adapter = adapter
 
         viewModel.food.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
+                adapter.notifyDataSetChanged()
             }
         })
 
-        return view
 
+        return view
     }
 
     override fun onDestroyView() {

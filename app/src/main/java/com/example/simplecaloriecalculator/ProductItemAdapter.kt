@@ -1,62 +1,46 @@
 package com.example.simplecaloriecalculator
 
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CheckBox
-import androidx.cardview.widget.CardView
-import com.hfad.simplecaloriecalculator.R
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import com.hfad.simplecaloriecalculator.databinding.ProductItemBinding
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 
-class ProductItemAdapter : RecyclerView.Adapter<ProductItemAdapter.ProductItemViewHolder>() {
+class ProductItemAdapter(val buttonListener: (product: Product) -> Unit) : ListAdapter<Product, ProductItemAdapter.ProductItemViewHolder>(ProductDiffItemCallback()) {
 
-    var data = listOf<Product>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun getItemCount() = data.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ProductItemViewHolder = ProductItemViewHolder.inflateFrom(parent)
 
     override fun onBindViewHolder(holder: ProductItemViewHolder, position: Int) {
-        val item = data[position]
-        holder.bind(item)
+        val item = getItem(position)
+        holder.bind(item, buttonListener)
     }
 
-    class ProductItemViewHolder(val rootView: CardView) : RecyclerView.ViewHolder(rootView) {
-
-        val productName = rootView.findViewById<TextView>(R.id.product_name)
-        val productProteins = rootView.findViewById<TextView>(R.id.product_proteins)
-        val productFats = rootView.findViewById<TextView>(R.id.product_fats)
-        val productCarbs = rootView.findViewById<TextView>(R.id.product_carbs)
-        val productCalories = rootView.findViewById<TextView>(R.id.product_portion_calories)
-        val productPortionWeight = rootView.findViewById<TextView>(R.id.product_portion_weight)
-
+    class ProductItemViewHolder(val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
             fun inflateFrom(parent: ViewGroup): ProductItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater
-                    .inflate(R.layout.product_item, parent, false) as CardView
-                return ProductItemViewHolder(view)
+                val binding = ProductItemBinding.inflate(layoutInflater, parent, false)
+                return ProductItemViewHolder(binding)
             }
         }
 
-        fun bind(item: Product) {
-
-            productName.text = item.name
-            productProteins.text = "Б: " + (roundOffDecimal(item.proteinsPerPortion)).toString() + " г"
-            productFats.text = "Ж: " + (roundOffDecimal(item.fatsPerPortion)).toString() + " г"
-            productCarbs.text = "У: " + (roundOffDecimal(item.carbsPerPortion)).toString() + " г"
-            productCalories.text = "ккал: " + (roundOffDecimal(item.caloriesPerPortion)).toString()
-            productPortionWeight.text = "Порция: " + item.portionWeight.toString() + " г"
-
+        fun bind(item: Product, buttonListener: (product: Product) -> Unit) {
+            binding.productName.text = item.name
+            binding.productProteins.text = "Б: " + (roundOffDecimal(item.proteinsPerPortion)).toString() + " г"
+            binding.productFats.text = "Ж: " + (roundOffDecimal(item.fatsPerPortion)).toString() + " г"
+            binding.productCarbs.text = "У: " + (roundOffDecimal(item.carbsPerPortion)).toString() + " г"
+            binding.productPortionCalories.text = "ккал: " + (roundOffDecimal(item.caloriesPerPortion)).toString()
+            binding.productPortionWeight.text = "Порция: " + item.portionWeight.toString() + " г"
+            binding.productOptionsButton.setOnClickListener {
+                buttonListener(item)
+            }
         }
 
         private fun roundOffDecimal(number: Double): Double {
@@ -66,4 +50,14 @@ class ProductItemAdapter : RecyclerView.Adapter<ProductItemAdapter.ProductItemVi
         }
 
     }
+}
+
+class ProductDiffItemCallback : DiffUtil.ItemCallback<Product>() {
+
+    override fun areItemsTheSame(oldItem: Product, newItem: Product ): Boolean
+            = (oldItem.id == newItem.id)
+
+    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = (oldItem == newItem)
+
+
 }
