@@ -1,4 +1,4 @@
-package com.example.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator
 
 //БЖУК на 1 грамм продукта, вес порции в граммах
 data class Product(
