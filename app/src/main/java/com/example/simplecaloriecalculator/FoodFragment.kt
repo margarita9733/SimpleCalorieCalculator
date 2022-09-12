@@ -22,6 +22,7 @@ class FoodFragment : Fragment() {
 
         val viewModel = FoodViewModel()
 
+
         val adapter = ProductItemAdapter { product ->
             viewModel.removeFromList(product)
 
@@ -31,7 +32,7 @@ class FoodFragment : Fragment() {
         viewModel.food.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
-                adapter.notifyDataSetChanged()
+               // adapter.notifyDataSetChanged()
             }
         })
 

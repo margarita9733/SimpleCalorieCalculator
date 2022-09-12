@@ -12,7 +12,6 @@ import java.text.DecimalFormat
 
 class ProductItemAdapter(val buttonListener: (product: Product) -> Unit) : ListAdapter<Product, ProductItemAdapter.ProductItemViewHolder>(ProductDiffItemCallback()) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ProductItemViewHolder = ProductItemViewHolder.inflateFrom(parent)
 

@@ -1,8 +1,5 @@
 package com.example.simplecaloriecalculator
 
-
-
-
 //БЖУК на 1 грамм продукта, вес порции в граммах
 data class Product(
     val id: Long = 0,
@@ -18,4 +15,4 @@ data class Product(
     val fatsPerPortion = fats * portionWeight
     val carbsPerPortion = carbs * portionWeight
     val caloriesPerPortion =  calories * portionWeight
-}  
+}
