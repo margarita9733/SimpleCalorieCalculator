@@ -40,5 +40,9 @@ class FoodViewModel : ViewModel() {
         _food.value = products
     }
 
-    fun lastElementId() = products[products.lastIndex].id
+    fun lastElementId():Long {
+      return  if (products.lastIndex == -1) 0 else products[products.lastIndex].id
+
+    }
+
 }
