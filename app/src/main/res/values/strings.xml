@@ -8,4 +8,16 @@
     <string name="product_proteins">Б: </string>
     <string name="product_fats">Ж: </string>
     <string name="product_carbs">У: </string>
+    <string name="product_name_edit_text">Название</string>
+    <string name="product_calories">Калории</string>
+    <string name="portion_weight">Вес порции</string>
+    <string name="edit_text_product_proteins">Белки</string>
+    <string name="edit_text_product_carbs">Углеводы</string>
+    <string name="edit_text_product_fats">Жиры</string>
+    <string name="button_save_product">Сохранить</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="text_product_parameters">Параметры указываются на 1 грамм продукта</string>
+    <string name="product_default_name">Продукт</string>
+    <string name="deletion_confirmation">Удалить?</string>
+    <string name="delete">удалить</string>
 </resources>

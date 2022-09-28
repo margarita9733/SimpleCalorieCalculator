@@ -46,26 +46,6 @@ class ProductItemAdapter(val buttonListener: (product: Product) -> Unit) :
 
         fun Double.format(scale: Int) = "%.${scale}f".format(this)
 
-
-
-        /*fun bind(item: Product, buttonListener: (product: Product) -> Unit) {
-            binding.productName.text = item.name
-            binding.productProteins.text = "Б: " + fm(item.proteinsPerPortion) + " г"
-            binding.productFats.text = "Ж: " + fm(item.fatsPerPortion) + " г"
-            binding.productCarbs.text = "У: " + fm(item.carbsPerPortion) + " г"
-            binding.productPortionCalories.text = "ккал: " + fm(item.caloriesPerPortion)
-            binding.productPortionWeight.text = "Порция: " + item.portionWeight + " г"
-            binding.productOptionsButton.setOnClickListener {
-                buttonListener(item)
-            }
-        }
-
-        fun fm(number: Double): String {
-            return String.format("%.2f", number)
-        }*/
-
-
-
         class ProductDiffItemCallback : DiffUtil.ItemCallback<Product>() {
 
             override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = (oldItem.id == newItem.id)

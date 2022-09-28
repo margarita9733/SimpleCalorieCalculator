@@ -5,13 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.hfad.simplecaloriecalculator.databinding.FragmentFoodBinding
 
-
 class FoodFragment : Fragment() {
+
     private var _binding: FragmentFoodBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: FoodViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,24 +28,33 @@ class FoodFragment : Fragment() {
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val viewModel = FoodViewModel()
+        binding.fabGoToAddScreen.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, AddProductFragment::class.java, null)
+                .setReorderingAllowed(true)
+                .addToBackStack("add_product_show_screen")
+                .commit()
+        }
+        return view
+    }
 
-
+    override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
         val adapter = ProductItemAdapter { product ->
-            viewModel.removeFromList(product)
+//            var dialog = ProductDeletionDialogFragment()
+//            var fm = childFragmentManager
+//                dialog.show(fm, "MyDialogFragment")
+            showProductDeletionDialog(product)
+           // ProductDeletionDialogFragment().show(childFragmentManager, ProductDeletionDialogFragment.TAG)// product ->
+           // viewModel.removeFromList(product)
 
         }
-        binding.productsList.adapter = adapter
 
+        binding.productsList.adapter = adapter
         viewModel.food.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
-               // adapter.notifyDataSetChanged()
             }
         })
-
-
-        return view
     }
 
     override fun onDestroyView() {
@@ -45,4 +62,17 @@ class FoodFragment : Fragment() {
         _binding = null
     }
 
+    private fun showProductDeletionDialog(product: Product) {
+        val dialog = ProductDeletionDialogFragment(
+            onDeleteClicked = {
+                viewModel.removeFromList(product)
+                val toast = Toast.makeText(context, "I deleted an item: ${product.name} ${product.id} ", Toast.LENGTH_SHORT).show()
+            },
+            onDismissClicked = {
+            parentFragmentManager.popBackStack()
+               // val toast = Toast.makeText(context, "dismiss ", Toast.LENGTH_SHORT).show()
+            }
+        )
+        dialog.show(requireActivity().supportFragmentManager, "tag")
+    }
 }
