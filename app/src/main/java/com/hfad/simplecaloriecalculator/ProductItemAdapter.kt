@@ -3,15 +3,17 @@ package com.hfad.simplecaloriecalculator
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.hfad.simplecaloriecalculator.databinding.ProductItemBinding
+import kotlinx.coroutines.NonDisposableHandle.parent
 import java.lang.NumberFormatException
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 
-class ProductItemAdapter(val buttonListener: (product: Product) -> Unit) :
+class ProductItemAdapter(val buttonListener: (product: Product) -> Unit, val itemLstnr: (product:Product) -> Unit) :
     ListAdapter<Product, ProductItemAdapter.ProductItemViewHolder>(ProductItemViewHolder.ProductDiffItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
@@ -19,7 +21,7 @@ class ProductItemAdapter(val buttonListener: (product: Product) -> Unit) :
 
     override fun onBindViewHolder(holder: ProductItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, buttonListener)
+        holder.bind(item, buttonListener, itemLstnr)
     }
 
     class ProductItemViewHolder(val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -32,16 +34,16 @@ class ProductItemAdapter(val buttonListener: (product: Product) -> Unit) :
             }
         }
 
-        fun bind(item: Product, buttonListener: (product: Product) -> Unit) {
+        fun bind(item: Product, buttonListener: (product: Product) -> Unit, itemLstnr: (Product) -> Unit) {
             binding.productName.text = item.name
             binding.productProteins.text = "Б: " + item.proteinsPerPortion.format(2) + " г"
             binding.productFats.text = "Ж: " + item.fatsPerPortion.format(2) + " г"
             binding.productCarbs.text = "У: " + item.carbsPerPortion.format(2) + " г"
             binding.productPortionCalories.text = "ккал: " + item.caloriesPerPortion.format(2)
             binding.productPortionWeight.text = "Порция: " + item.portionWeight.format(2) + " г"
-            binding.productOptionsButton.setOnClickListener {
-                buttonListener(item)
-            }
+            binding.productOptionsButton.setOnClickListener { buttonListener(item) }
+            var c = binding.root.context
+            binding.root.setOnClickListener /*{ Toast.makeText(c, "clicked ${item.name}", Toast.LENGTH_SHORT).show() } */ { itemLstnr(item) }
         }
 
         fun Double.format(scale: Int) = "%.${scale}f".format(this)

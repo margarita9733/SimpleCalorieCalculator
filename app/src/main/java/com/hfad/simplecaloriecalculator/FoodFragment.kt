@@ -1,6 +1,7 @@
 package com.hfad.simplecaloriecalculator
 
 import android.os.Bundle
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,19 +36,22 @@ class FoodFragment : Fragment() {
                 .addToBackStack("add_product_show_screen")
                 .commit()
         }
+
         return view
     }
 
-    override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
-        val adapter = ProductItemAdapter { product ->
-//            var dialog = ProductDeletionDialogFragment()
-//            var fm = childFragmentManager
-//                dialog.show(fm, "MyDialogFragment")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val adapter = ProductItemAdapter({ product ->
             showProductDeletionDialog(product)
-           // ProductDeletionDialogFragment().show(childFragmentManager, ProductDeletionDialogFragment.TAG)// product ->
-           // viewModel.removeFromList(product)
+        }, {product ->
+            Toast.makeText(context, "item ${product.name} ${product.id} clicked", Toast.LENGTH_SHORT).show()
 
-        }
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, EditProductFragment(product), null)
+                .setReorderingAllowed(true)
+                .addToBackStack("edit_product_show_screen")
+                .commit()
+        })
 
         binding.productsList.adapter = adapter
         viewModel.food.observe(viewLifecycleOwner, Observer {
@@ -69,10 +73,20 @@ class FoodFragment : Fragment() {
                 val toast = Toast.makeText(context, "I deleted an item: ${product.name} ${product.id} ", Toast.LENGTH_SHORT).show()
             },
             onDismissClicked = {
-            parentFragmentManager.popBackStack()
-               // val toast = Toast.makeText(context, "dismiss ", Toast.LENGTH_SHORT).show()
+                parentFragmentManager.popBackStack()
+                // val toast = Toast.makeText(context, "dismiss ", Toast.LENGTH_SHORT).show()
             }
         )
         dialog.show(requireActivity().supportFragmentManager, "tag")
     }
 }
+
+/*
+var itemVals: Bundle = Bundle()
+itemVals.putLong("productId", it.id)
+itemVals.putString("productName", it.name)
+itemVals.putDouble("productProteins", it.proteins)
+itemVals.putDouble("productFats", it.fats)
+itemVals.putDouble("productCarbs", it.carbs)
+itemVals.putDouble("productCalories", it.calories)
+itemVals.putDouble("productPortionWeight", it.portionWeight)*/

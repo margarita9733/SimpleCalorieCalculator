@@ -96,7 +96,7 @@
         tools:layout_editor_absoluteX="285dp" />
 
     <Button
-        android:id="@+id/button_add_product"
+        android:id="@+id/button_save_changes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
@@ -116,7 +116,7 @@
         android:minHeight="48dp"
         android:padding="2dp"
         android:text="@string/button_cancel"
-        app:layout_constraintEnd_toStartOf="@id/button_add_product"
+        app:layout_constraintEnd_toStartOf="@id/button_save_changes"
         app:layout_constraintTop_toBottomOf="@id/edit_text_product_fats" />
 
     <TextView

@@ -40,6 +40,14 @@ class FoodViewModel : ViewModel() {
         _food.value = products
     }
 
+    fun updateProduct(product: Product) {
+        var listToChange = products.toMutableList()
+        val productToUpdate = listToChange.indexOfFirst { it.id == product.id }
+        listToChange[productToUpdate] = product
+        products = listToChange.toList()
+        _food.value = products
+    }
+
     fun lastElementId():Long {
       return  if (products.lastIndex == -1) 0 else products[products.lastIndex].id
 
