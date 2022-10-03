@@ -39,8 +39,6 @@ class EditProductFragment(product: Product) : Fragment() {
         }
 
         binding.buttonCancel.setOnClickListener { parentFragmentManager.popBackStack() }
-       // binding.editTextProductName.text = vals.
-
           return view
     }
 
