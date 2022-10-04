@@ -26,11 +26,11 @@ class EditProductFragment(product: Product) : Fragment() {
         val view = binding.root
 
         binding.editTextProductName.setText(productToDisplay.name)
-        binding.editTextProductProteins.setText(productToDisplay.proteins.toString())
-        binding.editTextProductFats.setText(productToDisplay.fats.toString())
-        binding.editTextProductCarbs.setText(productToDisplay.carbs.toString())
+        binding.editTextProductProteins.setText((productToDisplay.proteins * 100).format(2).toString())
+        binding.editTextProductFats.setText((productToDisplay.fats * 100).format(2).toString())
+        binding.editTextProductCarbs.setText((productToDisplay.carbs * 100).format(2).toString())
+        binding.editTextProductKcal.setText((productToDisplay.calories * 100).format(2).toString())
         binding.editTextProductPortion.setText(productToDisplay.portionWeight.toString())
-        binding.editTextProductKcal.setText(productToDisplay.calories.toString())
 
         binding.buttonSaveChanges.setOnClickListener {
             viewModel.updateProduct(changeProduct())
@@ -67,28 +67,28 @@ class EditProductFragment(product: Product) : Fragment() {
             when (proteinsEntered) {
                 "" -> 0.0
                 productToDisplay.proteins.toString() -> productToDisplay.proteins
-                else -> proteinsEntered.toDouble()
+                else -> proteinsEntered.toDouble() / 100
             }
 
         val pFats =
             when (fatsEntered) {
                 "" -> 0.0
                 productToDisplay.fats.toString() -> productToDisplay.fats
-                else -> fatsEntered.toDouble()
+                else -> fatsEntered.toDouble() / 100
             }
 
         val pCarbs =
             when (carbsEntered) {
                 "" -> 0.0
                 productToDisplay.carbs.toString() -> productToDisplay.carbs
-                else -> carbsEntered.toDouble()
+                else -> carbsEntered.toDouble() / 100
             }
 
         val pKcal =
             when (kcalEntered) {
                 "" -> 0.0
                 productToDisplay.calories.toString() -> productToDisplay.calories
-                else -> kcalEntered.toDouble()
+                else -> kcalEntered.toDouble() / 100
             }
 
         val pPortion =
@@ -99,4 +99,5 @@ class EditProductFragment(product: Product) : Fragment() {
             }
         return Product(productToDisplay.id, pName, pProteins, pFats, pCarbs, pKcal, pPortion)
     }
+    fun Double.format(scale: Int) = "%.${scale}f".format(this)
 }

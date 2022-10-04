@@ -61,7 +61,7 @@ class AddProductFragment : Fragment() {
 
         val pId: Long = giveId()
 
-        val p = Product(pId,pName,pProteins,pFats,pCarbs,pKcal,pPortion)
+        val p = Product(pId,pName,pProteins / 100,pFats / 100,pCarbs / 100,pKcal / 100,pPortion)
 
         return p
     }

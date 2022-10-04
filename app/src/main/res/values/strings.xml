@@ -16,7 +16,7 @@
     <string name="edit_text_product_fats">Жиры</string>
     <string name="button_save_product">Сохранить</string>
     <string name="button_cancel">Отмена</string>
-    <string name="text_product_parameters">Параметры указываются на 1 грамм продукта</string>
+    <string name="text_product_parameters">Параметры указываются на 100 грамм продукта</string>
     <string name="product_default_name">Продукт</string>
     <string name="deletion_confirmation">Удалить?</string>
     <string name="delete">удалить</string>

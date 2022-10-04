@@ -3,14 +3,11 @@ package com.hfad.simplecaloriecalculator
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.hfad.simplecaloriecalculator.databinding.ProductItemBinding
-import kotlinx.coroutines.NonDisposableHandle.parent
-import java.lang.NumberFormatException
-import java.math.RoundingMode
-import java.text.DecimalFormat
+
+
 
 
 class ProductItemAdapter(val buttonListener: (product: Product) -> Unit, val itemLstnr: (product:Product) -> Unit) :
