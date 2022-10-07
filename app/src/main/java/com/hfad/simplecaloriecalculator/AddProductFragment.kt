@@ -30,7 +30,7 @@ class AddProductFragment : Fragment() {
 
         binding.buttonAddProduct.setOnClickListener {
             var i = createProduct()
-            val toast = Toast.makeText(context, "${i.name} ${i.id} ${i.proteins}p " +
+            Toast.makeText(context, "${i.name} ${i.id} ${i.proteins}p " +
                     " ${i.fats}f ${i.carbs}c ${i.calories}Kcal ${i.portionWeight}portion " +
                     "created ", Toast.LENGTH_LONG).show()
 

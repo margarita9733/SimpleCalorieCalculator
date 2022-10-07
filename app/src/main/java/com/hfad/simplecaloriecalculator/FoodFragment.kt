@@ -81,12 +81,3 @@ class FoodFragment : Fragment() {
     }
 }
 
-/*
-var itemVals: Bundle = Bundle()
-itemVals.putLong("productId", it.id)
-itemVals.putString("productName", it.name)
-itemVals.putDouble("productProteins", it.proteins)
-itemVals.putDouble("productFats", it.fats)
-itemVals.putDouble("productCarbs", it.carbs)
-itemVals.putDouble("productCalories", it.calories)
-itemVals.putDouble("productPortionWeight", it.portionWeight)*/

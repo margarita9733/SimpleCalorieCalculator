@@ -26,10 +26,10 @@ class EditProductFragment(product: Product) : Fragment() {
         val view = binding.root
 
         binding.editTextProductName.setText(productToDisplay.name)
-        binding.editTextProductProteins.setText((productToDisplay.proteins * 100).format(2).toString())
-        binding.editTextProductFats.setText((productToDisplay.fats * 100).format(2).toString())
-        binding.editTextProductCarbs.setText((productToDisplay.carbs * 100).format(2).toString())
-        binding.editTextProductKcal.setText((productToDisplay.calories * 100).format(2).toString())
+        binding.editTextProductProteins.setText((productToDisplay.proteins * 100).format(2))
+        binding.editTextProductFats.setText((productToDisplay.fats * 100).format(2))
+        binding.editTextProductCarbs.setText((productToDisplay.carbs * 100).format(2))
+        binding.editTextProductKcal.setText((productToDisplay.calories * 100).format(2))
         binding.editTextProductPortion.setText(productToDisplay.portionWeight.toString())
 
         binding.buttonSaveChanges.setOnClickListener {

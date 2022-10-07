@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 
 class FoodViewModel : ViewModel() {
 
-
-
     private var products: List<Product> = listOf<Product>(
         Product(1, "Творог 5%", 0.17, 0.05, 0.018, 1.21, 100.0),
         Product(2, "Персик", 0.009, 0.001, 0.113, 0.46, 60.0),
@@ -52,5 +50,9 @@ class FoodViewModel : ViewModel() {
       return  if (products.lastIndex == -1) 0 else products[products.lastIndex].id
 
     }
+
+    var dishOne = Dish(0, "dish1",150.0)
+
+
 
 }
