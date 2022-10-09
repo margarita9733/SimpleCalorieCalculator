@@ -1,15 +1,12 @@
 package com.hfad.simplecaloriecalculator
 
-import android.icu.util.UniversalTimeScale.toLong
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import com.hfad.simplecaloriecalculator.databinding.FragmentAddProductBinding
 
 class AddProductFragment : Fragment() {
@@ -73,7 +70,3 @@ class AddProductFragment : Fragment() {
         _binding = null
     }
 }
-// как проверить, пустой editText или нет?
-// когда он пустой, это не null  и не пустая строка
-// инциализировать  переменную дефолтным значением,
-// если окно не пустое - присвоить значение окна

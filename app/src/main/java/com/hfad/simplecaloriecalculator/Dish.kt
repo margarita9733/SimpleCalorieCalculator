@@ -3,15 +3,17 @@ package com.hfad.simplecaloriecalculator
 class Dish(
     var id: Long = 0,
     var name: String = "",
-    var portionWeight: Double = 100.0
+    var portionWeight: Double = 100.0,
+    var ingredients: MutableMap<Product, Double> = mutableMapOf<Product, Double>()
 ) : Food {
 
-    // состав и БЖУК на
+    // var ingredients: MutableMap<Product, Double>
+    // состав и БЖУК на список продуктов
     // список: ингредиент - количество ингредиента
     // ключ - ID ингредиента, значение - количество
     // количество - по весу в граммах
-    // !если и. упоминается второй раз - суммировать
-    var ingredients: MutableMap<Product, Double> = mutableMapOf<Product, Double>()
+    // ! если и. упоминается второй раз - суммировать
+
 
     fun proteinsPerGram() = ingredients.map { it.key.proteins }.sum() / ingredients.size
     fun fatsPerGram() = ingredients.map { it.key.fats }.sum() / ingredients.size

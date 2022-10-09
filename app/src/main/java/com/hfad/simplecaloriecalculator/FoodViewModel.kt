@@ -46,13 +46,48 @@ class FoodViewModel : ViewModel() {
         _food.value = products
     }
 
-    fun lastElementId():Long {
-      return  if (products.lastIndex == -1) 0 else products[products.lastIndex].id
+    fun lastElementId(): Long {
+        return if (products.lastIndex == -1) 0 else products[products.lastIndex].id
 
     }
+///////////////////////////////////////////////////////////////
 
-    var dishOne = Dish(0, "dish1",150.0)
+    var ings: MutableMap<Product, Double> = mutableMapOf<Product, Double>(
+        products[0] to 120.0,
+        products[6] to 30.0,
+        products[5] to 10.0
+    )
 
+    private var dishesToDisplay: List<Dish> = listOf<Dish>(Dish(0, "dish1", 150.0, ings))
 
+    private var _dishes: MutableLiveData<List<Dish>> = MutableLiveData(dishesToDisplay)
+    val dishes: LiveData<List<Dish>> get() = _dishes
 
+    fun removeDish(dish: Dish) {
+        var listToChange = dishesToDisplay.toMutableList()
+        val i = listToChange.indexOfFirst { it.id == dish.id }
+        listToChange.removeAt(i)
+        dishesToDisplay = listToChange.toList()
+        _dishes.value = dishesToDisplay
+    }
+
+    fun addDish(dish: Dish) {
+        var listToChange = dishesToDisplay.toMutableList()
+        listToChange.add(dish)
+        dishesToDisplay = listToChange.toList()
+        _dishes.value = dishesToDisplay
+    }
+
+    fun updateDish(dish: Dish) {
+        var listToChange = dishesToDisplay.toMutableList()
+        val dishToUpdate = listToChange.indexOfFirst { it.id == dish.id }
+        listToChange[dishToUpdate] = dish
+        dishesToDisplay = listToChange.toList()
+        _dishes.value = dishesToDisplay
+    }
+
+    fun lastDishId(): Long {
+        return if (dishesToDisplay.lastIndex == -1) 0 else dishesToDisplay[dishesToDisplay.lastIndex].id
+
+    }
 }
