@@ -44,7 +44,7 @@ class FoodFragment : Fragment() {
         val adapter = ProductItemAdapter({ product ->
             showProductDeletionDialog(product)
         }, {product ->
-            Toast.makeText(context, "item ${product.name} ${product.id} clicked", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "item ${product.name} ${product.id} clicked", Toast.LENGTH_SHORT).show()
 
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, EditProductFragment(product), null)
@@ -74,7 +74,6 @@ class FoodFragment : Fragment() {
             },
             onDismissClicked = {
                 parentFragmentManager.popBackStack()
-                // val toast = Toast.makeText(context, "dismiss ", Toast.LENGTH_SHORT).show()
             }
         )
         dialog.show(requireActivity().supportFragmentManager, "tag")

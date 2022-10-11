@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.hfad.simplecaloriecalculator.databinding.FragmentEditProductBinding
+import java.util.*
 
 class EditProductFragment(product: Product) : Fragment() {
 
     private var _binding: FragmentEditProductBinding? = null
     private val binding get() = _binding!!
-     val productToDisplay: Product = product
+    val productToDisplay: Product = product
 
     private val viewModel: FoodViewModel by activityViewModels()
 
@@ -25,12 +26,13 @@ class EditProductFragment(product: Product) : Fragment() {
         _binding = FragmentEditProductBinding.inflate(inflater, container, false)
         val view = binding.root
 
+
         binding.editTextProductName.setText(productToDisplay.name)
-        binding.editTextProductProteins.setText((productToDisplay.proteins * 100).format(2))
-        binding.editTextProductFats.setText((productToDisplay.fats * 100).format(2))
-        binding.editTextProductCarbs.setText((productToDisplay.carbs * 100).format(2))
-        binding.editTextProductKcal.setText((productToDisplay.calories * 100).format(2))
-        binding.editTextProductPortion.setText(productToDisplay.portionWeight.toString())
+        binding.editTextProductProteins.setText((productToDisplay.proteins * 100).format())
+        binding.editTextProductFats.setText((productToDisplay.fats * 100).format())
+        binding.editTextProductCarbs.setText((productToDisplay.carbs * 100).format())
+        binding.editTextProductKcal.setText((productToDisplay.calories * 100).format())
+        binding.editTextProductPortion.setText(productToDisplay.portionWeight.format())
 
         binding.buttonSaveChanges.setOnClickListener {
             viewModel.updateProduct(changeProduct())
@@ -39,7 +41,7 @@ class EditProductFragment(product: Product) : Fragment() {
         }
 
         binding.buttonCancel.setOnClickListener { parentFragmentManager.popBackStack() }
-          return view
+        return view
     }
 
     override fun onDestroyView() {
@@ -57,7 +59,7 @@ class EditProductFragment(product: Product) : Fragment() {
         val portionEntered = binding.editTextProductPortion.getText().toString()
 
         val pName =
-            when(nameEntered) {
+            when (nameEntered) {
                 "" -> "Product"
                 productToDisplay.name -> productToDisplay.name
                 else -> nameEntered
@@ -99,5 +101,8 @@ class EditProductFragment(product: Product) : Fragment() {
             }
         return Product(productToDisplay.id, pName, pProteins, pFats, pCarbs, pKcal, pPortion)
     }
-    fun Double.format(scale: Int) = "%.${scale}f".format(this)
+
+    fun Double.format() = "%.2f".format(Locale.US,this)
+    //val totalCaloriesPerHundredFormatted = "%.2f".format(totalCaloriesPerHundred)
+    //Locale.US
 }
