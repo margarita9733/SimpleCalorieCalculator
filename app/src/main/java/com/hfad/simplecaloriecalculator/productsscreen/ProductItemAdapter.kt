@@ -1,16 +1,15 @@
-package com.hfad.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator.productsscreen
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.ProductItemBinding
 
 
-
-
-class ProductItemAdapter(val buttonListener: (product: Product) -> Unit, val itemLstnr: (product:Product) -> Unit) :
+class ProductItemAdapter(val buttonListener: (product: Product) -> Unit, val itemLstnr: (product: Product) -> Unit) :
     ListAdapter<Product, ProductItemAdapter.ProductItemViewHolder>(ProductItemViewHolder.ProductDiffItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
@@ -47,7 +46,7 @@ class ProductItemAdapter(val buttonListener: (product: Product) -> Unit, val ite
 
         class ProductDiffItemCallback : DiffUtil.ItemCallback<Product>() {
 
-            override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = (oldItem.id == newItem.id)
+            override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = (oldItem.productId == newItem.productId)
 
             override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = (oldItem == newItem)
 

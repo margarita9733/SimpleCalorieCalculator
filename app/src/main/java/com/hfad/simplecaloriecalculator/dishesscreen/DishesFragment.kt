@@ -1,10 +1,11 @@
-package com.hfad.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator.dishesscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.hfad.simplecaloriecalculator.R
 
 
 class DishesFragment : Fragment() {

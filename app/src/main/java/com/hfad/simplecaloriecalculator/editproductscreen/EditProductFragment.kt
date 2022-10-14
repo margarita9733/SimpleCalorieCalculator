@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator.editproductscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.hfad.simplecaloriecalculator.productsscreen.FoodViewModel
+import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.FragmentEditProductBinding
 import java.util.*
 
@@ -34,11 +36,11 @@ class EditProductFragment(product: Product) : Fragment() {
         binding.editTextProductKcal.setText((productToDisplay.calories * 100).format())
         binding.editTextProductPortion.setText(productToDisplay.portionWeight.format())
 
-        binding.buttonSaveChanges.setOnClickListener {
+        /*binding.buttonSaveChanges.setOnClickListener {
             viewModel.updateProduct(changeProduct())
             val toast = Toast.makeText(context, "changes saved", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
-        }
+        }*/
 
         binding.buttonCancel.setOnClickListener { parentFragmentManager.popBackStack() }
         return view
@@ -99,7 +101,7 @@ class EditProductFragment(product: Product) : Fragment() {
                 productToDisplay.portionWeight.toString() -> productToDisplay.portionWeight
                 else -> portionEntered.toDouble()
             }
-        return Product(productToDisplay.id, pName, pProteins, pFats, pCarbs, pKcal, pPortion)
+        return Product(productToDisplay.productId, pName, pProteins, pFats, pCarbs, pKcal, pPortion)
     }
 
     fun Double.format() = "%.2f".format(Locale.US,this)

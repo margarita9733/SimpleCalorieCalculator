@@ -1,17 +1,19 @@
-package com.hfad.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator.productsscreen
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.hfad.simplecaloriecalculator.CalcDatabase
+import com.hfad.simplecaloriecalculator.editproductscreen.EditProductFragment
+import com.hfad.simplecaloriecalculator.Product
+import com.hfad.simplecaloriecalculator.R
+import com.hfad.simplecaloriecalculator.addproductscreen.AddProductFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.hfad.simplecaloriecalculator.databinding.FragmentFoodBinding
 
 class FoodFragment : Fragment() {
@@ -19,7 +21,9 @@ class FoodFragment : Fragment() {
     private var _binding: FragmentFoodBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: FoodViewModel by activityViewModels()
+    lateinit var viewModel: FoodViewModel
+    //private val viewModel: FoodViewModel by activityViewModels()
+    //val application = requireActivity()
 
 
     override fun onCreateView(
@@ -29,7 +33,17 @@ class FoodFragment : Fragment() {
         _binding = FragmentFoodBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val application = requireNotNull(this.activity).application
+        val dao = CalcDatabase.getInstance(application).productDao
+        val viewModelFactory = FoodViewModelFactory(dao)
+        viewModel = ViewModelProvider(
+            this, viewModelFactory).get(FoodViewModel::class.java)
+
+
         binding.fabGoToAddScreen.setOnClickListener {
+            // var someProduct = Product(0, "Творог 5%", 0.17, 0.05, 0.018, 1.21, 100.0)
+            //viewModel.clearBase()
+
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, AddProductFragment::class.java, null)
                 .setReorderingAllowed(true)
@@ -67,10 +81,11 @@ class FoodFragment : Fragment() {
     }
 
     private fun showProductDeletionDialog(product: Product) {
+
         val dialog = ProductDeletionDialogFragment(
             onDeleteClicked = {
                 viewModel.removeFromList(product)
-                val toast = Toast.makeText(context, "deleted an item: ${product.name} ${product.id} ", Toast.LENGTH_SHORT).show()
+                val toast = Toast.makeText(context, "deleted an item: ${product.name} ${product.productId} ", Toast.LENGTH_SHORT).show()
             },
             onDismissClicked = {
                 parentFragmentManager.popBackStack()
