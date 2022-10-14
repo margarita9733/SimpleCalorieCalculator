@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
+import com.hfad.simplecaloriecalculator.CalcDatabase
 import com.hfad.simplecaloriecalculator.productsscreen.FoodViewModel
 import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.FragmentEditProductBinding
+import com.hfad.simplecaloriecalculator.productsscreen.FoodViewModelFactory
 import java.util.*
 
 class EditProductFragment(product: Product) : Fragment() {
@@ -18,7 +21,6 @@ class EditProductFragment(product: Product) : Fragment() {
     private val binding get() = _binding!!
     val productToDisplay: Product = product
 
-    private val viewModel: FoodViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +30,11 @@ class EditProductFragment(product: Product) : Fragment() {
         _binding = FragmentEditProductBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val application = requireNotNull(this.activity).application
+        val dao = CalcDatabase.getInstance(application).productDao
+        val viewModelFactory = EditProductViewModelFactory(dao)
+        val viewModel = ViewModelProvider(
+            this, viewModelFactory).get(EditProductViewModel::class.java)
 
         binding.editTextProductName.setText(productToDisplay.name)
         binding.editTextProductProteins.setText((productToDisplay.proteins * 100).format())
@@ -36,11 +43,11 @@ class EditProductFragment(product: Product) : Fragment() {
         binding.editTextProductKcal.setText((productToDisplay.calories * 100).format())
         binding.editTextProductPortion.setText(productToDisplay.portionWeight.format())
 
-        /*binding.buttonSaveChanges.setOnClickListener {
+        binding.buttonSaveChanges.setOnClickListener {
             viewModel.updateProduct(changeProduct())
             val toast = Toast.makeText(context, "changes saved", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
-        }*/
+        }
 
         binding.buttonCancel.setOnClickListener { parentFragmentManager.popBackStack() }
         return view
