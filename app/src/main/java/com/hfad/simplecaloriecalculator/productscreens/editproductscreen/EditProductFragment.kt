@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.editproductscreen
+package com.hfad.simplecaloriecalculator.productscreens.editproductscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.hfad.simplecaloriecalculator.CalcDatabase
-import com.hfad.simplecaloriecalculator.productsscreen.FoodViewModel
 import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.FragmentEditProductBinding
-import com.hfad.simplecaloriecalculator.productsscreen.FoodViewModelFactory
 import java.util.*
 
 class EditProductFragment(product: Product) : Fragment() {

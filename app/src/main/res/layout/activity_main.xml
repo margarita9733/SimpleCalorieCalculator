@@ -5,7 +5,8 @@
     android:id="@+id/fragment_container_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.hfad.simplecaloriecalculator.productsscreen.FoodFragment"
+    android:name="com.hfad.simplecaloriecalculator.dayscreen.DayFragment"
     tools:context=".MainActivity">
     tools:viewBindingIgnore="true"
+    <!--android:name="com.hfad.simplecaloriecalculator.productscreens.productsscreen.FoodFragment"-->
 </androidx.fragment.app.FragmentContainerView>

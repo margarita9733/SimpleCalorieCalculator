@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.addproductscreen
+package com.hfad.simplecaloriecalculator.productscreens.addproductscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

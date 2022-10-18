@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.addproductscreen
+package com.hfad.simplecaloriecalculator.productscreens.addproductscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.hfad.simplecaloriecalculator.CalcDatabase
-import com.hfad.simplecaloriecalculator.productsscreen.FoodViewModel
 import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.FragmentAddProductBinding
-import com.hfad.simplecaloriecalculator.productsscreen.FoodViewModelFactory
 
 class AddProductFragment : Fragment() {
 

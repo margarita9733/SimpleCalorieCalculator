@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.dishesscreen
+package com.hfad.simplecaloriecalculator.dishscreens.dishesscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.productsscreen
+package com.hfad.simplecaloriecalculator.productscreens.productsscreen
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

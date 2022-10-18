@@ -20,4 +20,6 @@
     <string name="product_default_name">Продукт</string>
     <string name="deletion_confirmation">Удалить?</string>
     <string name="delete">удалить</string>
+    <string name="day_calories_consumed_of_max">Калории: %1s / %2s</string>
+    <string name="day_calories_available">Доступно: %1$s</string>
 </resources>

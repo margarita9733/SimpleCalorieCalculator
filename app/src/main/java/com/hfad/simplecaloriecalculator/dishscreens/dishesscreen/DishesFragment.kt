@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.dishesscreen
+package com.hfad.simplecaloriecalculator.dishscreens.dishesscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
