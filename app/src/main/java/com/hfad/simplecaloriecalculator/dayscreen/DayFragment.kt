@@ -22,7 +22,6 @@ class DayFragment : Fragment() {
         _binding = FragmentDayBinding.inflate(inflater,container,false)
         val view = binding.root
 
-        var oldtext = binding.textCaloriesAvailable.getText().toString()
         binding.textCaloriesConsumedOfMax.text = getString(R.string.day_calories_consumed_of_max,defaultCaloriesConsumed.toString(),defaultMaxCalories.toString())
         binding.textCaloriesAvailable.text = getString(R.string.day_calories_available, defaultMaxCalories.toString())
 
