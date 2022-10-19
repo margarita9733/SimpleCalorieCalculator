@@ -38,9 +38,4 @@ class Dish(
     fun removeIngredient(product: Product) {
         ingredients.remove(product)
     }
-    /*inline fun<T, R> Iterable<T>.fold(initial: R, operation: (acc: R, T) -> R): R {
-    var accumulator = initial
-        for (element in this) accumulator = operation(accumulator,element)
-        return accumulator
-    }*/
 }
