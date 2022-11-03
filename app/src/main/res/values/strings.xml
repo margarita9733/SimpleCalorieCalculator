@@ -26,4 +26,9 @@
     <string name="bottom_menu_products">Продукты</string>
     <string name="bottom_menu_dishes">Блюда</string>
     <string name="bottom_menu_meals">Наборы</string>
+
+    <string name="proteins_letter_placeholder">Б: %1$s г </string>
+    <string name="fats_letter_placeholder">Ж: %1$s г</string>
+    <string name="carbs_letter_placeholder">У: %1$s г</string>
+
 </resources>

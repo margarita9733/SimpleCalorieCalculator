@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/diary_navigation"
         android:enabled="true"
         android:icon="@drawable/ic_diary"
-        android:title="@string/bottom_menu_diary"/>
+        android:title="@string/bottom_menu_diary" />
 
     <item
         android:id="@+id/products_navigation"
@@ -16,12 +17,6 @@
         android:id="@+id/dishes_navigation"
         android:enabled="true"
         android:icon="@drawable/ic_dish"
-        android:title="@string/bottom_menu_dishes"/>
-
-    <item
-        android:id="@+id/meals_navigation"
-        android:enabled="true"
-        android:icon="@drawable/ic_meal"
-        android:title="@string/bottom_menu_meals"/>
+        android:title="@string/bottom_menu_dishes" />
 
 </menu>

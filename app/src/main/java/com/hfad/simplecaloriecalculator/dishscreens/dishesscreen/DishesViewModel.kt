@@ -19,8 +19,8 @@ class DishesViewModel: ViewModel() {
 
     var ings: MutableMap<Product, Double> = mutableMapOf<Product, Double>(
         products[0] to 120.0,
-        products[6] to 30.0,
-        products[5] to 10.0
+        products[1] to 30.0,
+        products[4] to 10.0
     )
 
     private var dishesToDisplay: List<Dish> = listOf<Dish>(Dish(0, "dish1", 150.0, ings))

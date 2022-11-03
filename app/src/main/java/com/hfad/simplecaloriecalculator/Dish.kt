@@ -1,11 +1,11 @@
 package com.hfad.simplecaloriecalculator
 
-class Dish(
+data class Dish(
     var id: Long = 0,
     var name: String = "",
     var portionWeight: Double = 100.0,
     var ingredients: MutableMap<Product, Double> = mutableMapOf<Product, Double>()
-) : Food {
+) : Food {          // MutableMap<Продукт, Вес>
 
     // var ingredients: MutableMap<Product, Double>
     // состав и БЖУК на список продуктов
@@ -13,17 +13,32 @@ class Dish(
     // ключ - ID ингредиента, значение - количество
     // количество - по весу в граммах
     // ! если и. упоминается второй раз - суммировать
+    //fun proteinsPerGram() = ingredients.map { it.key.proteins }.sum() / ingredients.size
 
 
-    fun proteinsPerGram() = ingredients.map { it.key.proteins }.sum() / ingredients.size
-    fun fatsPerGram() = ingredients.map { it.key.fats }.sum() / ingredients.size
-    fun carbsPerGram() = ingredients.map { it.key.carbs }.sum() / ingredients.size
-    fun caloriesPerGram() = ingredients.map { it.key.calories }.sum() / ingredients.size
+    val proteinsPerGram
+        get() = ingredients.keys.sumOf { it.proteins } / ingredients.values.sumOf { it }
 
-    fun proteinsPerPortion() = proteinsPerGram() * portionWeight
-    fun fatsPerPortion() = fatsPerGram() * portionWeight
-    fun carbsPerPortion() = carbsPerGram() * portionWeight
-    fun caloriesPerPortion() = caloriesPerGram() * portionWeight
+    val fatsPerGram
+        get() = ingredients.keys.sumOf { it.fats } / ingredients.values.sumOf { it }
+
+    val carbsPerGram
+        get() = ingredients.keys.sumOf { it.carbs } / ingredients.values.sumOf { it }
+
+    val caloriesPerGram
+        get() = ingredients.keys.sumOf { it.calories } / ingredients.values.sumOf { it }
+
+    val proteinsPerPortion
+        get() = proteinsPerGram * portionWeight
+
+    val fatsPerPortion
+        get() = fatsPerGram * portionWeight
+
+    val carbsPerPortion
+        get() = carbsPerGram * portionWeight
+
+    val caloriesPerPortion
+        get() = caloriesPerGram * portionWeight
 
 
     override fun getProteinsPer100(proteinsPerGram: Double): Double = proteinsPerGram * 100

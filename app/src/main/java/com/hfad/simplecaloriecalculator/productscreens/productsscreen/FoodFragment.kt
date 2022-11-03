@@ -39,7 +39,7 @@ class FoodFragment : Fragment() {
             this, viewModelFactory).get(FoodViewModel::class.java)
 
 
-        binding.fabGoToAddScreen.setOnClickListener {
+        binding.fabGoToAddProductScreen.setOnClickListener {
             // var someProduct = Product(0, "Творог 5%", 0.17, 0.05, 0.018, 1.21, 100.0)
             //viewModel.clearBase()
 
@@ -54,11 +54,11 @@ class FoodFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val adapter = ProductItemAdapter({ product ->
             showProductDeletionDialog(product)
         }, {product ->
             //Toast.makeText(context, "item ${product.name} ${product.id} clicked", Toast.LENGTH_SHORT).show()
-
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, EditProductFragment(product), null)
                 .setReorderingAllowed(true)
