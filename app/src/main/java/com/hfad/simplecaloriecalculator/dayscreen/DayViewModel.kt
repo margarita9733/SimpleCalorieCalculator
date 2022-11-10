@@ -36,8 +36,8 @@ class DayViewModel : ViewModel() {
     private var _meal: MutableLiveData<List<FoodToDisplay>> = MutableLiveData(
         listOf(
             FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 100.0),
-            FoodToDisplay(dishesToDisplay[1], dishesToDisplay[1].id, 200.0),
-            FoodToDisplay(dishesToDisplay[2], dishesToDisplay[2].id, 300.0),
+            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 200.0),
+            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 300.0),
 
             FoodToDisplay(products[0], products[0].id, 100.0),
             FoodToDisplay(products[0], products[0].id, 200.0),

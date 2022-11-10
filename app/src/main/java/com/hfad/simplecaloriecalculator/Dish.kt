@@ -7,41 +7,31 @@ data class Dish(
 ) : Food {
     var defaultPortionWeight: Double = 100.0
 
-    // var ingredients: MutableMap<Product, Double>
     // состав и БЖУК на список продуктов
-    // список: ингредиент - количество ингредиента
-    // ключ - ID ингредиента, значение - количество
-    // количество - по весу в граммах
-    // ! если и. упоминается второй раз - суммировать
-    //fun proteinsPerGram() = ingredients.map { it.key.proteins }.sum() / ingredients.size
-
 
     val proteinsPerGram
-        get() = ingredients.keys.sumOf { it.proteins } / ingredients.values.sumOf { it }
+        get() = ingredients.entries.sumOf { it.key.proteins } / ingredients.values.sumOf { it }
 
     val fatsPerGram
-        get() = ingredients.keys.sumOf { it.fats } / ingredients.values.sumOf { it }
+        get() = ingredients.entries.sumOf { it.key.fats } / ingredients.values.sumOf { it }
 
     val carbsPerGram
-        get() = ingredients.keys.sumOf { it.carbs } / ingredients.values.sumOf { it }
-
-   /* val caloriesPerGram
-        get() = ingredients.keys.sumOf { it.calories * ingredients.entries[it].value } / ingredients.values.sumOf { it }*/
+        get() = ingredients.entries.sumOf { it.key.carbs } / ingredients.values.sumOf { it }
 
     val caloriesPerGram
         get() = ingredients.entries.sumOf{it.key.calories * it.value} / ingredients.values.sumOf{it}
 
 
-    val proteinsPerPortion
+    val proteinsPerDefaultPortion
         get() = proteinsPerGram * defaultPortionWeight
 
-    val fatsPerPortion
+    val fatsPerDefaultPortion
         get() = fatsPerGram * defaultPortionWeight
 
-    val carbsPerPortion
+    val carbsPerDefaultPortion
         get() = carbsPerGram * defaultPortionWeight
 
-    val caloriesPerPortion
+    val caloriesPerDefaultPortion
         get() = caloriesPerGram * defaultPortionWeight
 
     override fun getProteinsPer100(): Double = proteinsPerGram * 100

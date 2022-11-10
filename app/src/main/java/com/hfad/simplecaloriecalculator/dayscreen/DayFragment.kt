@@ -14,7 +14,7 @@ class DayFragment : Fragment() {
     private var _binding: FragmentDayBinding? = null
     private val binding get() = _binding!!
 
-   private val viewModel: DayViewModel by activityViewModels()
+    private val viewModel: DayViewModel by activityViewModels()
 
     val defaultMaxCalories: Double = 1500.0
     val defaultCaloriesConsumed: Double = 2.0
@@ -23,7 +23,7 @@ class DayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDayBinding.inflate(inflater,container,false)
+        _binding = FragmentDayBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -41,10 +41,15 @@ class DayFragment : Fragment() {
             it?.let { it ->
                 adapter.submitList(it)
 
-                caloriesConsumed = 1200.0
-                caloriesAvailable =  caloriesMax - caloriesConsumed
-                binding.textCaloriesConsumedOfMax.text = getString(R.string.day_calories_consumed_of_max,caloriesConsumed.toString(),caloriesMax.toString())
-                binding.textCaloriesAvailable.text = getString(R.string.day_calories_available, caloriesAvailable.toString())
+                caloriesConsumed = it.sumOf { it.getCaloriesPerPortion() }
+                caloriesAvailable = caloriesMax - caloriesConsumed
+                binding.textCaloriesConsumedOfMax.text = getString(R.string.day_calories_consumed_of_max, caloriesConsumed.toString(), caloriesMax.toString())
+
+                binding.textCaloriesAvailable.text = if (caloriesAvailable > 0) {
+                    getString(R.string.day_calories_available, caloriesAvailable.toString())
+                } else {
+                    getString(R.string.day_calories_excess, (0.0 - caloriesAvailable).toString())
+                }
             }
         })
     }

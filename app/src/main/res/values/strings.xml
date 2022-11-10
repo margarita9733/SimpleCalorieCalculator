@@ -22,6 +22,7 @@
     <string name="delete">удалить</string>
     <string name="day_calories_consumed_of_max">Калории: %1s / %2s</string>
     <string name="day_calories_available">Доступно: %1$s</string>
+    <string name="day_calories_excess">Перебор: %1$s</string>
     <string name="bottom_menu_diary">Дневник</string>
     <string name="bottom_menu_products">Продукты</string>
     <string name="bottom_menu_dishes">Блюда</string>
