@@ -23,7 +23,7 @@ class DishesViewModel: ViewModel() {
         products[4] to 10.0
     )
 
-    private var dishesToDisplay: List<Dish> = listOf<Dish>(Dish(0, "dish1", 150.0, ings))
+    private var dishesToDisplay: List<Dish> = listOf<Dish>(Dish(0, "dish1", ings))
 
     private var _dishes: MutableLiveData<List<Dish>> = MutableLiveData(dishesToDisplay)
     val dishes: LiveData<List<Dish>> get() = _dishes

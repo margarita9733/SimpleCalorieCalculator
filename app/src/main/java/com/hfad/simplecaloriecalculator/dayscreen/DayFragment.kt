@@ -9,7 +9,6 @@ import com.hfad.simplecaloriecalculator.R
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.hfad.simplecaloriecalculator.databinding.FragmentDayBinding
-import com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductItemAdapter
 
 class DayFragment : Fragment() {
     private var _binding: FragmentDayBinding? = null
@@ -26,12 +25,6 @@ class DayFragment : Fragment() {
     ): View? {
         _binding = FragmentDayBinding.inflate(inflater,container,false)
         val view = binding.root
-
-        binding.textCaloriesConsumedOfMax.text = getString(R.string.day_calories_consumed_of_max,defaultCaloriesConsumed.toString(),defaultMaxCalories.toString())
-        binding.textCaloriesAvailable.text = getString(R.string.day_calories_available, defaultMaxCalories.toString())
-
-
-
         return view
     }
 
@@ -39,9 +32,19 @@ class DayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = MealItemAdapter()
         binding.mealsList.adapter = adapter
+
+        var caloriesMax: Double = defaultMaxCalories
+        var caloriesConsumed: Double
+        var caloriesAvailable: Double
+
         viewModel.meal.observe(viewLifecycleOwner, Observer {
-            it?.let { newMap ->
-                adapter.submitList(newMap.map{it.key})
+            it?.let { it ->
+                adapter.submitList(it)
+
+                caloriesConsumed = 1200.0
+                caloriesAvailable =  caloriesMax - caloriesConsumed
+                binding.textCaloriesConsumedOfMax.text = getString(R.string.day_calories_consumed_of_max,caloriesConsumed.toString(),caloriesMax.toString())
+                binding.textCaloriesAvailable.text = getString(R.string.day_calories_available, caloriesAvailable.toString())
             }
         })
     }

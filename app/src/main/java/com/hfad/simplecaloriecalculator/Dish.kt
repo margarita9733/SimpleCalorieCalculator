@@ -1,11 +1,11 @@
 package com.hfad.simplecaloriecalculator
 
 data class Dish(
-    var id: Long = 0,
+    override val id: Long = 0,
     var name: String = "",
-    var portionWeight: Double = 100.0,
-    var ingredients: MutableMap<Product, Double> = mutableMapOf<Product, Double>()
-) : Food {          // MutableMap<Продукт, Вес>
+    var ingredients: MutableMap<Product, Double> = mutableMapOf<Product, Double>() // MutableMap<Продукт, Вес>
+) : Food {
+    var defaultPortionWeight: Double = 100.0
 
     // var ingredients: MutableMap<Product, Double>
     // состав и БЖУК на список продуктов
@@ -25,26 +25,29 @@ data class Dish(
     val carbsPerGram
         get() = ingredients.keys.sumOf { it.carbs } / ingredients.values.sumOf { it }
 
+   /* val caloriesPerGram
+        get() = ingredients.keys.sumOf { it.calories * ingredients.entries[it].value } / ingredients.values.sumOf { it }*/
+
     val caloriesPerGram
-        get() = ingredients.keys.sumOf { it.calories } / ingredients.values.sumOf { it }
+        get() = ingredients.entries.sumOf{it.key.calories * it.value} / ingredients.values.sumOf{it}
+
 
     val proteinsPerPortion
-        get() = proteinsPerGram * portionWeight
+        get() = proteinsPerGram * defaultPortionWeight
 
     val fatsPerPortion
-        get() = fatsPerGram * portionWeight
+        get() = fatsPerGram * defaultPortionWeight
 
     val carbsPerPortion
-        get() = carbsPerGram * portionWeight
+        get() = carbsPerGram * defaultPortionWeight
 
     val caloriesPerPortion
-        get() = caloriesPerGram * portionWeight
+        get() = caloriesPerGram * defaultPortionWeight
 
-
-    override fun getProteinsPer100(proteinsPerGram: Double): Double = proteinsPerGram * 100
-    override fun getFatsPer100(fatsPerGram: Double): Double = fatsPerGram * 100
-    override fun getCarbsPer100(carbsPerGram: Double): Double = carbsPerGram * 100
-    override fun getCaloriesPer100(caloriesPerGram: Double): Double = caloriesPerGram * 100
+    override fun getProteinsPer100(): Double = proteinsPerGram * 100
+    override fun getFatsPer100(): Double = fatsPerGram * 100
+    override fun getCarbsPer100(): Double = carbsPerGram * 100
+    override fun getCaloriesPer100(): Double = caloriesPerGram * 100
 
     fun addIngredient(product: Product, weight: Double) {
         ingredients[product] = weight

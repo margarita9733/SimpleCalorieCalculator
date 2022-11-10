@@ -10,6 +10,6 @@ import kotlinx.coroutines.launch
 class EditProductViewModel(val dao: ProductDao) : ViewModel() {
     fun updateProduct(product: Product) {
         viewModelScope.launch { dao.update(product) }
-        Log.i("VM", "product updated ${product.productId}")
+        Log.i("VM", "product updated ${product.id}")
     }
 }

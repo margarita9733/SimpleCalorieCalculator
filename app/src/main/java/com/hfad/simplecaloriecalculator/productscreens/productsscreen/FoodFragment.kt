@@ -84,7 +84,7 @@ class FoodFragment : Fragment() {
         val dialog = ProductDeletionDialogFragment(
             onDeleteClicked = {
                 viewModel.removeFromList(product)
-                val toast = Toast.makeText(context, "deleted an item: ${product.name} ${product.productId} ", Toast.LENGTH_SHORT).show()
+                val toast = Toast.makeText(context, "deleted an item: ${product.name} ${product.id} ", Toast.LENGTH_SHORT).show()
             },
             onDismissClicked = {
                 parentFragmentManager.popBackStack()

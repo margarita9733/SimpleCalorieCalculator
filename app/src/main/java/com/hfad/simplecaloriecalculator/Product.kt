@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "product_table")
 data class Product(
     @PrimaryKey(autoGenerate = true)
-    var productId: Long = 0,
+    override val id: Long = 0,
 
     @ColumnInfo(name = "product_name")
     var name: String = "",
@@ -33,19 +33,19 @@ data class Product(
 ) : Food {
 
     val proteinsPerPortion
-    get() = proteins * portionWeight
+        get() = proteins * portionWeight
 
     val fatsPerPortion
-    get() = fats * portionWeight
+        get() = fats * portionWeight
 
     val carbsPerPortion
-    get() = carbs * portionWeight
+        get() = carbs * portionWeight
 
     val caloriesPerPortion
-    get() = calories * portionWeight
+        get() = calories * portionWeight
 
-    override fun getProteinsPer100(proteinsPerGram: Double): Double = proteins * 100
-    override fun getFatsPer100(fatsPerGram: Double): Double = fats * 100
-    override fun getCarbsPer100(carbsPerGram: Double): Double = carbs * 100
-    override fun getCaloriesPer100(caloriesPerGram: Double): Double = calories * 100
+    override fun getProteinsPer100(): Double = proteins * 100
+    override fun getFatsPer100(): Double = fats * 100
+    override fun getCarbsPer100(): Double = carbs * 100
+    override fun getCaloriesPer100(): Double = calories * 100
 }

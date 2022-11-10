@@ -14,12 +14,12 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/meal_name"
+            android:id="@+id/meal_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="12dp"
-            android:text="@string/product_name"
+            android:text="@string/time_insnt_defined"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,10 +32,10 @@
             android:text="@string/product_portion_weight"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/meal_portion_calories" />
+            app:layout_constraintTop_toTopOf="@id/meal_calories" />
 
         <TextView
-            android:id="@+id/meal_portion_calories"
+            android:id="@+id/meal_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
@@ -56,7 +56,7 @@
             android:src="@drawable/ic_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_name"
+            app:layout_constraintTop_toBottomOf="@id/meal_time"
             tools:ignore="ContentDescription,HardcodedText,SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

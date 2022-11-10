@@ -14,41 +14,43 @@ class DayViewModel : ViewModel() {
         Product(3, "Фундук", 0.16, 0.669, 0.09, 7.04, 20.0),
         Product(4, "Сахар", 0.0, 0.0, 9.97, 3.98, 15.0),
         Product(5, "Чернослив", 0.023, 0.007, 0.57, 2.31, 30.0),
+        Product(6, "X", 0.023, 0.007, 0.57, 3.0, 30.0),
+        Product(7, "Y", 0.023, 0.007, 0.57, 4.0, 30.0)
     )
 
     var ingsA: MutableMap<Product, Double> = mutableMapOf<Product, Double>(
         products[0] to 120.0,
-        products[1] to 30.0,
-        products[4] to 10.0
+        products[1] to 30.0
+        /*products[5] to 10.0,
+        products[6] to 20.0,*/
     )
 
-    var ingsB: MutableMap<Product, Double> = mutableMapOf<Product, Double>(
-        products[0] to 120.0,
-        products[2] to 40.0,
-        products[4] to 10.0
-    )
-
-    var ingsC: MutableMap<Product, Double> = mutableMapOf<Product, Double>(
-        products[0] to 120.0,
-        products[3] to 20.0,
-        products[4] to 10.0
-    )
 
     private var dishesToDisplay: List<Dish> = listOf<Dish>(
-        Dish(0, "dish1", 150.0, ingsA),
-        Dish(1, "dish1", 150.0, ingsA),
-        Dish(2, "dish1", 150.0, ingsA),
+        Dish(0, "dish1", ingsA),
+        Dish(1, "dish1", ingsA),
+        Dish(2, "dish1", ingsA),
+        )
 
-        Dish(3, "dish2", 120.0, ingsB), // default portions of each dish
-        Dish(4, "dish2", 120.0, ingsB),
-        Dish(5, "dish2", 120.0, ingsB),
 
-        Dish(6, "dish3", 200.0, ingsC),
-        Dish(7, "dish3", 200.0, ingsC),
-        Dish(8, "dish3", 200.0, ingsC)
+    private var _meal: MutableLiveData<List<FoodToDisplay>> = MutableLiveData(
+        listOf(
+            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 100.0),
+            FoodToDisplay(dishesToDisplay[1], dishesToDisplay[1].id, 200.0),
+            FoodToDisplay(dishesToDisplay[2], dishesToDisplay[2].id, 300.0),
+
+            FoodToDisplay(products[0], products[0].id, 100.0),
+            FoodToDisplay(products[0], products[0].id, 200.0),
+            FoodToDisplay(products[0], products[0].id, 300.0)
+        )
     )
-                                // Map<Dish,PortionEntered>
-    private var _meal: MutableLiveData<Map<Dish, Double>> = MutableLiveData(
+
+    val meal: LiveData<List<FoodToDisplay>> get() = _meal
+
+
+//  сделать специальный класс и использовать его объекты для передачи объектов еды в адаптер
+
+/* private var _meal: MutableLiveData<Map<Food, Double>> = MutableLiveData(
         mapOf(
             dishesToDisplay[0] to 100.0,
             dishesToDisplay[1] to 200.0,
@@ -63,7 +65,9 @@ class DayViewModel : ViewModel() {
             dishesToDisplay[8] to 300.0
         )
     )
-    val meal: LiveData<Map<Dish, Double>> get() = _meal
+
+    val meal: LiveData<Map<Food, Double>> get() = _meal*/
+
 
     /*fun removeDish(dish: Dish) {
         var listToChange = dishesToDisplay.toMutableList()
@@ -92,6 +96,14 @@ class DayViewModel : ViewModel() {
         return if (dishesToDisplay.lastIndex == -1) 0 else dishesToDisplay[dishesToDisplay.lastIndex].id
 
     }*/
+
+    /*var foodAdded: MutableMap<Food,Double>  = mutableMapOf(
+        dishesToDisplay[0] to 100.0,
+        dishesToDisplay[1] to 200.0,
+        dishesToDisplay[2] to 300.0,
+        products[2] to 35.0)
+
+         val food: MutableLiveData<Map<Food, Double>> = MutableLiveData(foodAdded)*/
 
     //fun getTotalCaloriesConsumed() = sumOf{dishes.value?.forEach { it.caloriesPerGram * }}
 }

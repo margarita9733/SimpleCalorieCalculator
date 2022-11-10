@@ -15,10 +15,10 @@ interface ProductDao {
     @Delete
     suspend fun delete(product: Product)
 
-    @Query("SELECT * FROM product_table WHERE productId = :productId")
+    @Query("SELECT * FROM product_table WHERE id = :productId")
     fun get(productId: Long) : LiveData<Product>
 
-    @Query("SELECT * FROM product_table ORDER BY productId DESC")
+    @Query("SELECT * FROM product_table ORDER BY id DESC")
     fun getAll(): LiveData<List<Product>>
 
     @Delete

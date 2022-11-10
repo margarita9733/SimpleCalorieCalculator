@@ -105,7 +105,7 @@ class EditProductFragment(product: Product) : Fragment() {
                 productToDisplay.portionWeight.toString() -> productToDisplay.portionWeight
                 else -> portionEntered.toDouble()
             }
-        return Product(productToDisplay.productId, pName, pProteins, pFats, pCarbs, pKcal, pPortion)
+        return Product(productToDisplay.id, pName, pProteins, pFats, pCarbs, pKcal, pPortion)
     }
 
     fun Double.format() = "%.2f".format(Locale.US,this)

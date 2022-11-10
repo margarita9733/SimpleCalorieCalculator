@@ -1,8 +1,11 @@
 package com.hfad.simplecaloriecalculator
 
 interface Food {
-    fun getProteinsPer100(proteinsPerGram: Double): Double
-    fun getFatsPer100(fatsPerGram: Double): Double
-    fun getCarbsPer100(carbsPerGram: Double): Double
-    fun getCaloriesPer100(caloriesPerGram: Double): Double
+
+    val id: Long
+
+    fun getProteinsPer100(): Double
+    fun getFatsPer100(): Double
+    fun getCarbsPer100(): Double
+    fun getCaloriesPer100(): Double
 }
