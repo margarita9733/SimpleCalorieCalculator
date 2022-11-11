@@ -9,6 +9,7 @@ import com.hfad.simplecaloriecalculator.R
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.hfad.simplecaloriecalculator.databinding.FragmentDayBinding
+import kotlin.math.abs
 
 class DayFragment : Fragment() {
     private var _binding: FragmentDayBinding? = null
@@ -48,7 +49,7 @@ class DayFragment : Fragment() {
                 binding.textCaloriesAvailable.text = if (caloriesAvailable > 0) {
                     getString(R.string.day_calories_available, caloriesAvailable.toString())
                 } else {
-                    getString(R.string.day_calories_excess, (0.0 - caloriesAvailable).toString())
+                    getString(R.string.day_calories_excess, abs(caloriesAvailable).toString())
                 }
             }
         })

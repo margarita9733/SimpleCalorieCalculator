@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        binding.bottomNavigation.selectedItemId = R.id.diary_navigation
     }
 
     override fun onDestroy() {
