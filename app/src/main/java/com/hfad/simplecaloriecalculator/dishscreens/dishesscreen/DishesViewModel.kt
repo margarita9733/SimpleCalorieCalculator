@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.Product
+import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 
-class DishesViewModel: ViewModel() {
+class DishesViewModel : ViewModel() {
 
     private var products: List<Product> = listOf<Product>(
         Product(1, "Творог 5%", 0.17, 0.05, 0.018, 1.21, 100.0),
@@ -15,15 +16,16 @@ class DishesViewModel: ViewModel() {
         Product(4, "Сахар", 0.0, 0.0, 9.97, 3.98, 15.0),
         Product(5, "Чернослив", 0.023, 0.007, 0.57, 2.31, 30.0),
 
+        )
+
+    var ings: MutableList<Ingredient> = mutableListOf(
+        Ingredient(products[0].id, products[0], 120.0),
+        Ingredient(products[1].id, products[1], 30.0),
+        /*Ingredient(products[5].id, products[5], 30.0),
+        Ingredient(products[6].id, products[6], 30.0),*/
     )
 
-    var ings: MutableMap<Product, Double> = mutableMapOf<Product, Double>(
-        products[0] to 120.0,
-        products[1] to 30.0,
-        products[4] to 10.0
-    )
-
-    private var dishesToDisplay: List<Dish> = listOf<Dish>(Dish(0, "dish1", ings))
+    private var dishesToDisplay: List<Dish> = listOf<Dish>(Dish(0, ings))
 
     private var _dishes: MutableLiveData<List<Dish>> = MutableLiveData(dishesToDisplay)
     val dishes: LiveData<List<Dish>> get() = _dishes

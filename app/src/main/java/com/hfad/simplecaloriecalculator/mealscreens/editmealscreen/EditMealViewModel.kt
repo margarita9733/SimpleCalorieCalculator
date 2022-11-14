@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.Product
+import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 import com.hfad.simplecaloriecalculator.mealscreens.FoodToDisplay
 
 class EditMealViewModel : ViewModel() {
@@ -18,26 +19,26 @@ class EditMealViewModel : ViewModel() {
         Product(7, "Y", 0.023, 0.007, 0.57, 4.0, 30.0)
     )
 
-    var ingsA: MutableMap<Product, Double> = mutableMapOf<Product, Double>(
-        products[0] to 120.0,
-        products[1] to 30.0
-        /*products[5] to 10.0,
-        products[6] to 20.0,*/
+    var ingsA: MutableList<Ingredient> = mutableListOf(
+        Ingredient(products[0].id, products[0], 120.0),
+        Ingredient(products[1].id, products[1], 30.0),
+        /*Ingredient(products[5].id, products[5], 30.0),
+        Ingredient(products[6].id, products[6], 30.0),*/
     )
 
     private var dishesToDisplay: List<Dish> = listOf<Dish>(
-        Dish(0, "dish1", ingsA)
+        Dish(0, ingsA, "a")
     )
 
     private var _meal: MutableLiveData<List<FoodToDisplay>> = MutableLiveData(
         listOf(
-            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 100.0),
-            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 200.0),
-            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 300.0),
+            FoodToDisplay(dishesToDisplay[0].id, dishesToDisplay[0], 100.0),
+            FoodToDisplay(dishesToDisplay[0].id, dishesToDisplay[0], 200.0),
+            FoodToDisplay(dishesToDisplay[0].id, dishesToDisplay[0], 300.0),
 
-            FoodToDisplay(products[0], products[0].id, 100.0),
-            FoodToDisplay(products[0], products[0].id, 200.0),
-            FoodToDisplay(products[0], products[0].id, 300.0)
+            FoodToDisplay(products[0].id, products[0], 100.0),
+            FoodToDisplay(products[0].id, products[0], 200.0),
+            FoodToDisplay(products[0].id, products[0], 300.0)
         )
     )
 

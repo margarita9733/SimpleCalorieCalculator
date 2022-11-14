@@ -29,7 +29,7 @@ class FoodItemAdapter : ListAdapter<FoodToDisplay, FoodItemAdapter.FoodItemViewH
 
         fun bind(item: FoodToDisplay) {
 
-            binding.productName.text = item.foodElement.name
+            binding.productName.text = item.foodItem.name
             binding.productPortionCalories.text = item.getCaloriesPerPortion().format() + " ккал"
             binding.productPortionWeight.text = "Вес: " + item.portionEntered.format() + " г"
             binding.productProteins.text = "Б: " + item.getProteinsPerPortion().format() + " г"

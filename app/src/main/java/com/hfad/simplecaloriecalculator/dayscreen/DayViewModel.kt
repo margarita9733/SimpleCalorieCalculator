@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.Product
+import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 import com.hfad.simplecaloriecalculator.mealscreens.FoodToDisplay
 
 class DayViewModel : ViewModel() {
@@ -18,30 +19,26 @@ class DayViewModel : ViewModel() {
         Product(7, "Y", 0.023, 0.007, 0.57, 4.0, 30.0)
     )
 
-    var ingsA: MutableMap<Product, Double> = mutableMapOf<Product, Double>(
-        products[0] to 120.0,
-        products[1] to 30.0
-        /*products[5] to 10.0,
-        products[6] to 20.0,*/
+    var ingsA: MutableList<Ingredient> = mutableListOf(
+        Ingredient(products[0].id, products[0], 120.0),
+        Ingredient(products[1].id, products[1], 30.0),
+        /*Ingredient(products[5].id, products[5], 30.0),
+        Ingredient(products[6].id, products[6], 30.0),*/
     )
-
 
     private var dishesToDisplay: List<Dish> = listOf<Dish>(
-        Dish(0, "dish1", ingsA),
-        Dish(1, "dish1", ingsA),
-        Dish(2, "dish1", ingsA),
+        Dish(0, ingsA)
     )
-
 
     private var _meal: MutableLiveData<List<FoodToDisplay>> = MutableLiveData(
         listOf(
-            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 100.0),
-            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 200.0),
-            FoodToDisplay(dishesToDisplay[0], dishesToDisplay[0].id, 300.0),
+            FoodToDisplay(dishesToDisplay[0].id, dishesToDisplay[0], 100.0),
+            FoodToDisplay(dishesToDisplay[0].id, dishesToDisplay[0], 200.0),
+            FoodToDisplay(dishesToDisplay[0].id, dishesToDisplay[0], 300.0),
 
-            FoodToDisplay(products[0], products[0].id, 100.0),
-            FoodToDisplay(products[0], products[0].id, 200.0),
-            FoodToDisplay(products[0], products[0].id, 300.0)
+            FoodToDisplay(products[0].id, products[0], 100.0),
+            FoodToDisplay(products[0].id, products[0], 200.0),
+            FoodToDisplay(products[0].id, products[0], 300.0)
         )
     )
 
@@ -70,14 +67,12 @@ class DayViewModel : ViewModel() {
     val meal: LiveData<Map<Food, Double>> get() = _meal*/
 
 
+/*var foodAdded: MutableMap<Food,Double>  = mutableMapOf(
+    dishesToDisplay[0] to 100.0,
+    dishesToDisplay[1] to 200.0,
+    dishesToDisplay[2] to 300.0,
+    products[2] to 35.0)
 
-
-    /*var foodAdded: MutableMap<Food,Double>  = mutableMapOf(
-        dishesToDisplay[0] to 100.0,
-        dishesToDisplay[1] to 200.0,
-        dishesToDisplay[2] to 300.0,
-        products[2] to 35.0)
-
-         val food: MutableLiveData<Map<Food, Double>> = MutableLiveData(foodAdded)*/
+     val food: MutableLiveData<Map<Food, Double>> = MutableLiveData(foodAdded)*/
 
 
