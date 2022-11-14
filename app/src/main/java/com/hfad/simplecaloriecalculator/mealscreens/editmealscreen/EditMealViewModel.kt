@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.dayscreen
+package com.hfad.simplecaloriecalculator.mealscreens.editmealscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.mealscreens.FoodToDisplay
 
-class DayViewModel : ViewModel() {
+class EditMealViewModel : ViewModel() {
     private var products: List<Product> = listOf<Product>(
         Product(1, "Творог 5%", 0.17, 0.05, 0.018, 1.21, 100.0),
         Product(2, "Персик", 0.009, 0.001, 0.113, 0.46, 60.0),
@@ -25,13 +25,9 @@ class DayViewModel : ViewModel() {
         products[6] to 20.0,*/
     )
 
-
     private var dishesToDisplay: List<Dish> = listOf<Dish>(
-        Dish(0, "dish1", ingsA),
-        Dish(1, "dish1", ingsA),
-        Dish(2, "dish1", ingsA),
+        Dish(0, "dish1", ingsA)
     )
-
 
     private var _meal: MutableLiveData<List<FoodToDisplay>> = MutableLiveData(
         listOf(
@@ -51,33 +47,30 @@ class DayViewModel : ViewModel() {
 //  сделать специальный класс и использовать его объекты для передачи объектов еды в адаптер
 }
 
-/* private var _meal: MutableLiveData<Map<Food, Double>> = MutableLiveData(
-        mapOf(
-            dishesToDisplay[0] to 100.0,
-            dishesToDisplay[1] to 200.0,
-            dishesToDisplay[2] to 300.0,
+/*fun removeDish(dish: Dish) {
+        var listToChange = dishesToDisplay.toMutableList()
+        val i = listToChange.indexOfFirst { it.id == dish.id }
+        listToChange.removeAt(i)
+        dishesToDisplay = listToChange.toList()
+        _dishes.value = dishesToDisplay
+    }
 
-            dishesToDisplay[3] to 100.0,
-            dishesToDisplay[4] to 200.0,
-            dishesToDisplay[5] to 300.0,
+    fun addDish(dish: Dish) {
+        var listToChange = dishesToDisplay.toMutableList()
+        listToChange.add(dish)
+        dishesToDisplay = listToChange.toList()
+        _dishes.value = dishesToDisplay
+    }
 
-            dishesToDisplay[6] to 100.0,
-            dishesToDisplay[7] to 200.0,
-            dishesToDisplay[8] to 300.0
-        )
-    )
+    fun updateDish(dish: Dish) {
+        var listToChange = dishesToDisplay.toMutableList()
+        val dishToUpdate = listToChange.indexOfFirst { it.id == dish.id }
+        listToChange[dishToUpdate] = dish
+        dishesToDisplay = listToChange.toList()
+        _dishes.value = dishesToDisplay
+    }
 
-    val meal: LiveData<Map<Food, Double>> get() = _meal*/
+    fun lastDishId(): Long {
+        return if (dishesToDisplay.lastIndex == -1) 0 else dishesToDisplay[dishesToDisplay.lastIndex].id
 
-
-
-
-    /*var foodAdded: MutableMap<Food,Double>  = mutableMapOf(
-        dishesToDisplay[0] to 100.0,
-        dishesToDisplay[1] to 200.0,
-        dishesToDisplay[2] to 300.0,
-        products[2] to 35.0)
-
-         val food: MutableLiveData<Map<Food, Double>> = MutableLiveData(foodAdded)*/
-
-
+    }*/

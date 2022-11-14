@@ -27,3 +27,4 @@
 
     <!--android:name="com.hfad.simplecaloriecalculator.productscreens.productsscreen.FoodFragment"-->
     <!--android:name="com.hfad.simplecaloriecalculator.dayscreen.DayFragment"-->
+    <!--android:name="com.hfad.simplecaloriecalculator.mealscreens.editmealscreen.EditMealFragment"-->

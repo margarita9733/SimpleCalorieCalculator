@@ -14,7 +14,7 @@ data class Product(
     override val id: Long = 0,
 
     @ColumnInfo(name = "product_name")
-    var name: String = "",
+    override var name: String = "",
 
     @ColumnInfo(name = "product_proteins")
     var proteins: Double = 0.0,

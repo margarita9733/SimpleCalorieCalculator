@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hfad.simplecaloriecalculator.Dish
-import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.MealItemBinding
+import com.hfad.simplecaloriecalculator.mealscreens.FoodToDisplay
 
 
 class MealItemAdapter : ListAdapter<FoodToDisplay, MealItemAdapter.MealItemViewHolder>(MealItemViewHolder.MealDiffItemCallback()) {
@@ -45,7 +44,7 @@ class MealItemAdapter : ListAdapter<FoodToDisplay, MealItemAdapter.MealItemViewH
          а если в пп придут объект-блюдо и объект-продукт с одинаковыми id - ???*/
         class MealDiffItemCallback : DiffUtil.ItemCallback<FoodToDisplay>() {
 
-            override fun areItemsTheSame(oldItem: FoodToDisplay, newItem:FoodToDisplay): Boolean = ((oldItem.id == newItem.id) && (oldItem::class == newItem::class))
+            override fun areItemsTheSame(oldItem: FoodToDisplay, newItem: FoodToDisplay): Boolean = ((oldItem.id == newItem.id) && (oldItem::class == newItem::class))
 
             override fun areContentsTheSame(oldItem: FoodToDisplay, newItem: FoodToDisplay): Boolean = (oldItem == newItem)
 

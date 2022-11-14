@@ -9,15 +9,17 @@
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.245" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/dish_item.xml" value="0.1" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/food_item.xml" value="0.34010416666666665" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/fragment_add_product.xml" value="0.33" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/fragment_blank.xml" value="0.32685185185185184" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/fragment_day.xml" value="0.33" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/fragment_dishes.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/fragment_edit_meal.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/fragment_edit_product.xml" value="0.5" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/fragment_food.xml" value="0.25" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/fragment_food_list.xml" value="0.340625" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/meal_item.xml" value="0.255078125" />
-        <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/product_item.xml" value="0.1" />
+        <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/layout/product_item.xml" value="0.33" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.46124031007751937" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.245" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/R/SimpleCalorieCalculator/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.245" />

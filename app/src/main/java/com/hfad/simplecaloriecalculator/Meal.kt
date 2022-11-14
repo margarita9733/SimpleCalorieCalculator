@@ -5,5 +5,5 @@ class Meal(
     var time: Long = 0,
     var food: MutableMap<Food, Double> = mutableMapOf()
 ) {
-
+    //var calories get() =
 }

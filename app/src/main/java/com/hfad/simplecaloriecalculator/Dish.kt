@@ -2,7 +2,7 @@ package com.hfad.simplecaloriecalculator
 
 data class Dish(
     override val id: Long = 0,
-    var name: String = "",
+   override var name: String = "",
     var ingredients: MutableMap<Product, Double> = mutableMapOf<Product, Double>() // MutableMap<Продукт, Вес>
 ) : Food {
     var defaultPortionWeight: Double = 100.0

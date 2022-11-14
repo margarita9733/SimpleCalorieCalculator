@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.dayscreen
+package com.hfad.simplecaloriecalculator.mealscreens
 
 import com.hfad.simplecaloriecalculator.Food
 
