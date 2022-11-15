@@ -13,15 +13,15 @@ import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.productscreens.addproductscreen.AddProductFragment
 import androidx.lifecycle.ViewModelProvider
-import com.hfad.simplecaloriecalculator.databinding.FragmentFoodBinding
+import com.hfad.simplecaloriecalculator.databinding.FragmentProductsBinding
 
-class FoodFragment : Fragment() {
+class ProductsFragment : Fragment() {
 
-    private var _binding: FragmentFoodBinding? = null
+    private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var viewModel: FoodViewModel
-    //private val viewModel: FoodViewModel by activityViewModels()
+    lateinit var viewModel: ProductsViewModel
+    //private val viewModel: ProductsViewModel by activityViewModels()
     //val application = requireActivity()
 
 
@@ -29,14 +29,14 @@ class FoodFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFoodBinding.inflate(inflater, container, false)
+        _binding = FragmentProductsBinding.inflate(inflater, container, false)
         val view = binding.root
 
         val application = requireNotNull(this.activity).application
         val dao = CalcDatabase.getInstance(application).productDao
-        val viewModelFactory = FoodViewModelFactory(dao)
+        val viewModelFactory = ProductsViewModelFactory(dao)
         viewModel = ViewModelProvider(
-            this, viewModelFactory).get(FoodViewModel::class.java)
+            this, viewModelFactory).get(ProductsViewModel::class.java)
 
 
         binding.fabGoToAddProductScreen.setOnClickListener {

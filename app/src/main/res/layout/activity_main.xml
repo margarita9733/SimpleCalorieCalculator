@@ -7,7 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
-        android:name="com.hfad.simplecaloriecalculator.productscreens.productsscreen.FoodFragment"
+        android:name="com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductsFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
@@ -25,6 +25,6 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!--android:name="com.hfad.simplecaloriecalculator.productscreens.productsscreen.FoodFragment"-->
+    <!--android:name="com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductsFragmentment"-->
     <!--android:name="com.hfad.simplecaloriecalculator.dayscreen.DayFragment"-->
     <!--android:name="com.hfad.simplecaloriecalculator.mealscreens.editmealscreen.EditMealFragment"-->

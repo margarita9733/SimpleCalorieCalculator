@@ -2,14 +2,9 @@ package com.hfad.simplecaloriecalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils.replace
-import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
-import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.databinding.ActivityMainBinding
 import com.hfad.simplecaloriecalculator.dayscreen.DayFragment
-import com.hfad.simplecaloriecalculator.productscreens.productsscreen.FoodFragment
+import com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductsFragment
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -32,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.products_navigation -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container_view, FoodFragment::class.java, null)
+                        .replace(R.id.fragment_container_view, ProductsFragment::class.java, null)
                         .setReorderingAllowed(true)
                         .commit()
                     true

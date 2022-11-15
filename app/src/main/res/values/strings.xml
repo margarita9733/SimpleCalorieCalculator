@@ -38,5 +38,6 @@
     <string name="dish_default_placeholder">Блюдо %1$s</string>
 
     <string name="weight_placeholder">Вес %1$s г </string>
+    <string name="weight">Вес:</string>
 
 </resources>

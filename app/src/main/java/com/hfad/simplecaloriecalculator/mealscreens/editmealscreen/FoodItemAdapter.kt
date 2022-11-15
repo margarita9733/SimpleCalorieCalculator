@@ -29,12 +29,12 @@ class FoodItemAdapter : ListAdapter<FoodToDisplay, FoodItemAdapter.FoodItemViewH
 
         fun bind(item: FoodToDisplay) {
 
-            binding.productName.text = item.foodItem.name
-            binding.productPortionCalories.text = item.getCaloriesPerPortion().format() + " ккал"
-            binding.productPortionWeight.text = "Вес: " + item.portionEntered.format() + " г"
-            binding.productProteins.text = "Б: " + item.getProteinsPerPortion().format() + " г"
-            binding.productFats.text = "У: " + item.getFatsPerPortion().format() + " г"
-            binding.productCarbs.text = "Ж: " + item.getCarbsPerPortion().format() + " г"
+            binding.foodName.text = item.foodItem.name
+            binding.foodCalories.text = item.getCaloriesPerPortion().format() + " ккал"
+            binding.foodWeight.text = "Вес: " + item.portionEntered.format() + " г"
+            binding.foodProteins.text = "Б: " + item.getProteinsPerPortion().format() + " г"
+            binding.foodFats.text = "У: " + item.getFatsPerPortion().format() + " г"
+            binding.foodCarbs.text = "Ж: " + item.getCarbsPerPortion().format() + " г"
 
         }
 
