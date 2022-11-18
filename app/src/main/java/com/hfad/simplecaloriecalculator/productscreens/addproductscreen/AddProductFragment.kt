@@ -28,13 +28,16 @@ class AddProductFragment : Fragment() {
         val dao = CalcDatabase.getInstance(application).productDao
         val viewModelFactory = AddProductViewModelFactory(dao)
         val viewModel = ViewModelProvider(
-            this, viewModelFactory).get(AddProductViewModel::class.java)
+            this, viewModelFactory
+        ).get(AddProductViewModel::class.java)
 
         binding.buttonAddProduct.setOnClickListener {
             var i = createProduct()
-            Toast.makeText(context, "${i.name} ${i.id} ${i.proteins}p " +
-                    " ${i.fats}f ${i.carbs}c ${i.calories}Kcal ${i.portionWeight}portion " +
-                    "created ", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context, "${i.name} ${i.id} ${i.proteins}p " +
+                        " ${i.fats}f ${i.carbs}c ${i.calories}Kcal ${i.portionWeight}portion " +
+                        "created ", Toast.LENGTH_LONG
+            ).show()
 
             viewModel.addToList(i)
             parentFragmentManager.popBackStack()
@@ -61,9 +64,9 @@ class AddProductFragment : Fragment() {
         val pKcal = if (kcalEntered == "") 0.0 else kcalEntered.toDouble()
         val pPortion = if (portionEntered == "") 100.0 else portionEntered.toDouble()
 
-       // val pId: Long = giveId()
+        // val pId: Long = giveId()
 
-        val p = Product(0,pName,pProteins / 100,pFats / 100,pCarbs / 100,pKcal / 100,pPortion)
+        val p = Product(0, pName, pProteins / 100, pFats / 100, pCarbs / 100, pKcal / 100, pPortion)
 
         return p
     }

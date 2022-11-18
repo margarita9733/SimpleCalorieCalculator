@@ -36,7 +36,8 @@ class ProductsFragment : Fragment() {
         val dao = CalcDatabase.getInstance(application).productDao
         val viewModelFactory = ProductsViewModelFactory(dao)
         viewModel = ViewModelProvider(
-            this, viewModelFactory).get(ProductsViewModel::class.java)
+            this, viewModelFactory
+        ).get(ProductsViewModel::class.java)
 
 
         binding.fabGoToAddProductScreen.setOnClickListener {
@@ -57,7 +58,7 @@ class ProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = ProductItemAdapter({ product ->
             showProductDeletionDialog(product)
-        }, {product ->
+        }, { product ->
             //Toast.makeText(context, "item ${product.name} ${product.id} clicked", Toast.LENGTH_SHORT).show()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, EditProductFragment(product), null)
@@ -80,7 +81,6 @@ class ProductsFragment : Fragment() {
     }
 
     private fun showProductDeletionDialog(product: Product) {
-
         val dialog = ProductDeletionDialogFragment(
             onDeleteClicked = {
                 viewModel.removeFromList(product)

@@ -9,7 +9,7 @@
     <string name="product_fats">Ж: </string>
     <string name="product_carbs">У: </string>
     <string name="product_name_edit_text">Название</string>
-    <string name="product_calories">Калории</string>
+    <string name="product_calories">Калории: </string>
     <string name="portion_weight">Вес порции</string>
     <string name="edit_text_product_proteins">Белки</string>
     <string name="edit_text_product_carbs">Углеводы</string>
@@ -33,9 +33,11 @@
     <string name="carbs_letter_placeholder">У: %1$s г</string>
     <string name="calories_placeholder">Калории: %1$s</string>
 
-    <string name="text_parameters">На 100 грамм блюда:</string>
+    <string name="text_parameters_dish_100">На 100 грамм блюда:</string>
+    <string name="text_parameters_dish_portion">На порцию блюда:</string>
     <string name="product_default_placeholder">Продукт %1$s</string>
     <string name="dish_default_placeholder">Блюдо %1$s</string>
+    <string name="ingredients">Ингредиенты: </string>
 
     <string name="weight_placeholder">Вес %1$s г </string>
     <string name="weight">Вес:</string>

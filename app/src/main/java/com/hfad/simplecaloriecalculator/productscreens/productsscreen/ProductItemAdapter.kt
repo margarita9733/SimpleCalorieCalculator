@@ -9,7 +9,10 @@ import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.ProductItemBinding
 
 
-class ProductItemAdapter(val buttonListener: (product: Product) -> Unit, val itemLstnr: (product: Product) -> Unit) :
+class ProductItemAdapter(
+    val buttonListener: (product: Product) -> Unit,
+    val itemLstnr: (product: Product) -> Unit
+) :
     ListAdapter<Product, ProductItemAdapter.ProductItemViewHolder>(ProductItemViewHolder.ProductDiffItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
@@ -30,7 +33,11 @@ class ProductItemAdapter(val buttonListener: (product: Product) -> Unit, val ite
             }
         }
 
-        fun bind(item: Product, buttonListener: (product: Product) -> Unit, itemLstnr: (Product) -> Unit) {
+        fun bind(
+            item: Product,
+            buttonListener: (product: Product) -> Unit,
+            itemLstnr: (Product) -> Unit
+        ) {
             binding.productName.text = item.name
             //binding.productProteins.text = getString(R.string.proteins_letter_placeholder, item.proteinsPerPortion.toString())
             binding.productProteins.text = "Б: " + item.proteinsPerPortion.format() + " г"
@@ -47,7 +54,6 @@ class ProductItemAdapter(val buttonListener: (product: Product) -> Unit, val ite
         class ProductDiffItemCallback : DiffUtil.ItemCallback<Product>() {
 
             override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean = (oldItem.id == newItem.id)
-
             override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean = (oldItem == newItem)
 
         }
