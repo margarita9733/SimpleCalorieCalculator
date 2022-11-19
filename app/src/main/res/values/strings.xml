@@ -9,7 +9,7 @@
     <string name="product_fats">Ж: </string>
     <string name="product_carbs">У: </string>
     <string name="product_name_edit_text">Название</string>
-    <string name="product_calories">Калории</string>
+    <string name="product_calories">Калории: </string>
     <string name="portion_weight">Вес порции</string>
     <string name="edit_text_product_proteins">Белки</string>
     <string name="edit_text_product_carbs">Углеводы</string>
@@ -20,4 +20,26 @@
     <string name="product_default_name">Продукт</string>
     <string name="deletion_confirmation">Удалить?</string>
     <string name="delete">удалить</string>
+    <string name="day_calories_consumed_of_max">Калории: %1s / %2s</string>
+    <string name="day_calories_available">Доступно: %1$s</string>
+    <string name="day_calories_excess">Перебор: %1$s</string>
+    <string name="bottom_menu_diary">Дневник</string>
+    <string name="bottom_menu_products">Продукты</string>
+    <string name="bottom_menu_dishes">Блюда</string>
+    <string name="time_insnt_defined">Время не установлено</string>
+
+    <string name="proteins_letter_placeholder">Б: %1$s г </string>
+    <string name="fats_letter_placeholder">Ж: %1$s г</string>
+    <string name="carbs_letter_placeholder">У: %1$s г</string>
+    <string name="calories_placeholder">Калории: %1$s</string>
+
+    <string name="text_parameters_dish_100">На 100 грамм блюда:</string>
+    <string name="text_parameters_dish_portion">На порцию блюда:</string>
+    <string name="product_default_placeholder">Продукт %1$s</string>
+    <string name="dish_default_placeholder">Блюдо %1$s</string>
+    <string name="ingredients">Ингредиенты: </string>
+
+    <string name="weight_placeholder">Вес %1$s г </string>
+    <string name="weight">Вес:</string>
+
 </resources>

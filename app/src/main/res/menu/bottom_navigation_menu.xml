@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/diary_navigation"
+        android:enabled="true"
+        android:icon="@drawable/ic_diary"
+        android:title="@string/bottom_menu_diary" />
+
+    <item
+        android:id="@+id/products_navigation"
+        android:enabled="true"
+        android:icon="@drawable/ic_product_egg"
+        android:title="@string/bottom_menu_products" />
+
+    <item
+        android:id="@+id/dishes_navigation"
+        android:enabled="true"
+        android:icon="@drawable/ic_dish"
+        android:title="@string/bottom_menu_dishes" />
+
+</menu>

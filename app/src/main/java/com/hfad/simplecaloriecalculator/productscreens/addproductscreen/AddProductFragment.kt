@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator.productscreens.addproductscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,16 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
+import com.hfad.simplecaloriecalculator.CalcDatabase
+import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.FragmentAddProductBinding
 
 class AddProductFragment : Fragment() {
 
     private var _binding: FragmentAddProductBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: FoodViewModel by activityViewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,11 +24,20 @@ class AddProductFragment : Fragment() {
         _binding = FragmentAddProductBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val application = requireNotNull(this.activity).application
+        val dao = CalcDatabase.getInstance(application).productDao
+        val viewModelFactory = AddProductViewModelFactory(dao)
+        val viewModel = ViewModelProvider(
+            this, viewModelFactory
+        ).get(AddProductViewModel::class.java)
+
         binding.buttonAddProduct.setOnClickListener {
             var i = createProduct()
-            Toast.makeText(context, "${i.name} ${i.id} ${i.proteins}p " +
-                    " ${i.fats}f ${i.carbs}c ${i.calories}Kcal ${i.portionWeight}portion " +
-                    "created ", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context, "${i.name} ${i.id} ${i.proteins}p " +
+                        " ${i.fats}f ${i.carbs}c ${i.calories}Kcal ${i.portionWeight}portion " +
+                        "created ", Toast.LENGTH_LONG
+            ).show()
 
             viewModel.addToList(i)
             parentFragmentManager.popBackStack()
@@ -56,14 +64,14 @@ class AddProductFragment : Fragment() {
         val pKcal = if (kcalEntered == "") 0.0 else kcalEntered.toDouble()
         val pPortion = if (portionEntered == "") 100.0 else portionEntered.toDouble()
 
-        val pId: Long = giveId()
+        // val pId: Long = giveId()
 
-        val p = Product(pId,pName,pProteins / 100,pFats / 100,pCarbs / 100,pKcal / 100,pPortion)
+        val p = Product(0, pName, pProteins / 100, pFats / 100, pCarbs / 100, pKcal / 100, pPortion)
 
         return p
     }
 
-    fun giveId(): Long = (viewModel.lastElementId() + 1).toLong()
+    //fun giveId(): Long = (viewModel.lastElementId() + 1).toLong()
 
     override fun onDestroyView() {
         super.onDestroyView()

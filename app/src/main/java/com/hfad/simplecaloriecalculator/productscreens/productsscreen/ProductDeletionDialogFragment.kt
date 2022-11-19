@@ -1,12 +1,11 @@
-package com.hfad.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator.productscreens.productsscreen
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.DialogFragment
+import com.hfad.simplecaloriecalculator.R
 
 class ProductDeletionDialogFragment(
     private val onDeleteClicked: () -> Unit,

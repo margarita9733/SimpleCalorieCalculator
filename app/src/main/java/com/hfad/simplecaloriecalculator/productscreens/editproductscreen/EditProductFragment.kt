@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator.productscreens.editproductscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
+import com.hfad.simplecaloriecalculator.CalcDatabase
+import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.FragmentEditProductBinding
 import java.util.*
 
@@ -16,7 +18,6 @@ class EditProductFragment(product: Product) : Fragment() {
     private val binding get() = _binding!!
     val productToDisplay: Product = product
 
-    private val viewModel: FoodViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +27,11 @@ class EditProductFragment(product: Product) : Fragment() {
         _binding = FragmentEditProductBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val application = requireNotNull(this.activity).application
+        val dao = CalcDatabase.getInstance(application).productDao
+        val viewModelFactory = EditProductViewModelFactory(dao)
+        val viewModel = ViewModelProvider(
+            this, viewModelFactory).get(EditProductViewModel::class.java)
 
         binding.editTextProductName.setText(productToDisplay.name)
         binding.editTextProductProteins.setText((productToDisplay.proteins * 100).format())
