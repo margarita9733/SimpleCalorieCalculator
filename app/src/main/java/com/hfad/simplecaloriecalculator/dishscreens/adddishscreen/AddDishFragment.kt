@@ -38,7 +38,8 @@ class AddDishFragment : Fragment() {
 
 
 
-        binding.buttonCancel.setOnClickListener { parentFragmentManager.popBackStack() }
+        binding.buttonCancel.setOnClickListener { /*parentFragmentManager.popBackStack()
+            viewModel.removeDish(dishToDisplay)*/ }
 
         return view
     }
