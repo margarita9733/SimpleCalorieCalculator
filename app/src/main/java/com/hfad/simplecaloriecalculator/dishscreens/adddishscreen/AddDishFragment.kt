@@ -10,11 +10,14 @@ import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.databinding.FragmentAddDishBinding
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesViewModel
+import java.util.*
 
-class AddDishFragment : Fragment() {
+class AddDishFragment(dish: Dish) : Fragment() {
 
     private var _binding: FragmentAddDishBinding? = null
     private val binding get() = _binding!!
+
+    val dishToDisplay: Dish = dish
 
     val viewModel: DishesViewModel by activityViewModels()
 
@@ -28,18 +31,26 @@ class AddDishFragment : Fragment() {
 
 
         binding.fabGoToSelectProductScreen.setOnClickListener {
-
+//
         }
 
         binding.buttonAddDish.setOnClickListener {
-            //var d = createDish(id, name, list<Ingredient>)
-            //viewModel.addDish()
+            viewModel.updateDish(dishToDisplay)
         }
 
 
 
-        binding.buttonCancel.setOnClickListener { /*parentFragmentManager.popBackStack()
-            viewModel.removeDish(dishToDisplay)*/ }
+        binding.buttonCancel.setOnClickListener {
+            parentFragmentManager.popBackStack()
+            viewModel.removeDish(dishToDisplay)
+        }
+
+        binding.editTextDishName.setText(dishToDisplay.name)
+        binding.editTextDishPortion.setText(dishToDisplay.defaultPortionWeight.toString())
+        binding.textDishProteins.setText(getString(R.string.proteins_letter_placeholder, (dishToDisplay.proteinsPerGram * 100).format()))
+        binding.textDishFats.setText(getString(R.string.fats_letter_placeholder, (dishToDisplay.fatsPerGram * 100).format()))
+        binding.textDishCarbs.setText(getString(R.string.carbs_letter_placeholder, (dishToDisplay.carbsPerGram * 100).format()))
+        binding.textDishKcal.setText(getString(R.string.calories_placeholder, (dishToDisplay.caloriesPerGram * 100).format()))
 
         return view
     }
@@ -49,11 +60,5 @@ class AddDishFragment : Fragment() {
         _binding = null
     }
 
-    // update instead of adding
-    fun createDish(): Dish {
-        var d = Dish(0)
-        return d
-    }
-
-
+    fun Double.format() = "%.2f".format(Locale.US, this)
 }

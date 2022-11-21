@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.hfad.simplecaloriecalculator.Dish
+import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.databinding.FragmentEditDishBinding
 import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesViewModel
@@ -31,11 +32,11 @@ class EditDishFragment(dish: Dish) : Fragment() {
         val viewModel: DishesViewModel by activityViewModels()
 
         binding.editTextDishName.setText(dishToDisplay.name)
-        binding.editTextDishPortion.setText(dishToDisplay.defaultPortionWeight.format().toString())
-        binding.textDishProteins.setText((dishToDisplay.proteinsPerGram * 100).format().toString())
-        binding.textDishFats.setText((dishToDisplay.fatsPerGram * 100).format().toString())
-        binding.textDishCarbs.setText((dishToDisplay.carbsPerGram * 100).format().toString())
-        binding.textDishKcal.setText((dishToDisplay.caloriesPerGram * 100).format().toString())
+        binding.editTextDishPortion.setText(dishToDisplay.defaultPortionWeight.toString())
+        binding.textDishProteins.setText(getString(R.string.proteins_letter_placeholder, (dishToDisplay.proteinsPerGram * 100).format()))
+        binding.textDishFats.setText(getString(R.string.fats_letter_placeholder, (dishToDisplay.fatsPerGram * 100).format()))
+        binding.textDishCarbs.setText(getString(R.string.carbs_letter_placeholder, (dishToDisplay.carbsPerGram * 100).format()))
+        binding.textDishKcal.setText(getString(R.string.calories_placeholder, (dishToDisplay.caloriesPerGram * 100).format()))
 
         binding.buttonSaveChanges.setOnClickListener {
             viewModel.updateDish(changeDish())
@@ -52,10 +53,6 @@ class EditDishFragment(dish: Dish) : Fragment() {
 
     fun changeDish(): Dish {
         val nameEntered = binding.editTextDishName.text.toString()
-        val proteinsEntered = binding.textDishProteins.text.toString()
-        val fatsEntered = binding.textDishFats.text.toString()
-        val carbsEntered = binding.textDishCarbs.text.toString()
-        val kcalEntered = binding.textDishKcal.text.toString()
         val portionEntered = binding.editTextDishPortion.text.toString()
 
         val dName =
@@ -65,34 +62,6 @@ class EditDishFragment(dish: Dish) : Fragment() {
                 else -> nameEntered
             }
 
-        val dProteins =
-            when (proteinsEntered) {
-                "" -> 0.0
-                dishToDisplay.proteinsPerGram.toString() -> dishToDisplay.proteinsPerGram
-                else -> proteinsEntered.toDouble() / 100
-            }
-
-        val dFats =
-            when (fatsEntered) {
-                "" -> 0.0
-                dishToDisplay.fatsPerGram.toString() -> dishToDisplay.fatsPerGram
-                else -> fatsEntered.toDouble() / 100
-            }
-
-        val pCarbs =
-            when (carbsEntered) {
-                "" -> 0.0
-                dishToDisplay.carbsPerGram.toString() -> dishToDisplay.carbsPerGram
-                else -> carbsEntered.toDouble() / 100
-            }
-
-        val dKcal =
-            when (kcalEntered) {
-                "" -> 0.0
-                dishToDisplay.caloriesPerGram.toString() -> dishToDisplay.caloriesPerGram
-                else -> kcalEntered.toDouble() / 100
-            }
-
         val dPortion =
             when (portionEntered) {
                 "" -> 100.0
@@ -100,7 +69,8 @@ class EditDishFragment(dish: Dish) : Fragment() {
                 else -> portionEntered.toDouble()
             }
 
-        val dIngs: MutableList<Ingredient> = mutableListOf()
+        val dIngs: List<Ingredient> = listOf()
+
         var d: Dish = Dish(dishToDisplay.id, dIngs, dName)
         //d.fatsPerGram = dFats
         return d
