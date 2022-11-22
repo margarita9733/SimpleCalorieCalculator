@@ -40,7 +40,7 @@ class DishesFragment : Fragment() {
             val d = Dish(giveId())
             viewModel.addDish(d)
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, EditDishFragment(d), null)
+                .replace(R.id.fragment_container_view, AddDishFragment(d), null)
                 .setReorderingAllowed(true)
                 .addToBackStack("add_dish_show_screen")
                 .commit()
@@ -79,7 +79,7 @@ class DishesFragment : Fragment() {
         val dialog = DishDeletionDialogFragment(
             onDeleteClicked = {
                 viewModel.removeDish(dish)
-                val toast = Toast.makeText(context, "deleted an item: ${dish.name} ${dish.id} ", Toast.LENGTH_SHORT).show()
+                val toast = Toast.makeText(context, "deleted an item: ${dish.name} ", Toast.LENGTH_SHORT).show()
             },
             onDismissClicked = {
                 parentFragmentManager.popBackStack()

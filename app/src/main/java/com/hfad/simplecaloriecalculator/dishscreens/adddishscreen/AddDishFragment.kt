@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.databinding.FragmentAddDishBinding
+import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesViewModel
 import java.util.*
 
@@ -35,7 +37,9 @@ class AddDishFragment(dish: Dish) : Fragment() {
         }
 
         binding.buttonAddDish.setOnClickListener {
-            viewModel.updateDish(dishToDisplay)
+            viewModel.updateDish(changeDish())
+            val toast = Toast.makeText(context, "${dishToDisplay.name} saved", Toast.LENGTH_SHORT).show()
+            parentFragmentManager.popBackStack()
         }
 
 
@@ -58,6 +62,30 @@ class AddDishFragment(dish: Dish) : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun changeDish(): Dish {
+        val nameEntered = binding.editTextDishName.text.toString()
+        val portionEntered = binding.editTextDishPortion.text.toString()
+
+        val dName =
+            when (nameEntered) {
+                "" -> "Dish ${dishToDisplay.id}"
+                dishToDisplay.name -> dishToDisplay.name
+                else -> nameEntered
+            }
+        val dPortion =
+            when (portionEntered) {
+                "" -> 100.0
+                dishToDisplay.defaultPortionWeight.toString() -> dishToDisplay.defaultPortionWeight
+                else -> portionEntered.toDouble()
+            }
+        val dIngs: List<Ingredient> = listOf()
+
+        var d: Dish = Dish(dishToDisplay.id, dIngs, dName)
+        d.defaultPortionWeight = dPortion
+
+        return d
     }
 
     fun Double.format() = "%.2f".format(Locale.US, this)

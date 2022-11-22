@@ -53,7 +53,7 @@ class EditDishFragment(dish: Dish) : Fragment() {
 
     fun changeDish(): Dish {
         val nameEntered = binding.editTextDishName.text.toString()
-        val portionEntered = binding.editTextDishPortion.text.toString()
+        val portionEntered = binding.editTextDishPortion.getText().toString()
 
         val dName =
             when (nameEntered) {
@@ -61,20 +61,23 @@ class EditDishFragment(dish: Dish) : Fragment() {
                 dishToDisplay.name -> dishToDisplay.name
                 else -> nameEntered
             }
-
         val dPortion =
             when (portionEntered) {
                 "" -> 100.0
                 dishToDisplay.defaultPortionWeight.toString() -> dishToDisplay.defaultPortionWeight
                 else -> portionEntered.toDouble()
             }
-
         val dIngs: List<Ingredient> = listOf()
 
         var d: Dish = Dish(dishToDisplay.id, dIngs, dName)
-        //d.fatsPerGram = dFats
+        d.defaultPortionWeight = dPortion
         return d
     }
 
     fun Double.format() = "%.2f".format(Locale.US, this)
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
