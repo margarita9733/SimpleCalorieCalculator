@@ -51,6 +51,11 @@ class EditDishFragment(dish: Dish) : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
     fun changeDish(): Dish {
         val nameEntered = binding.editTextDishName.text.toString()
         val portionEntered = binding.editTextDishPortion.getText().toString()
@@ -68,6 +73,7 @@ class EditDishFragment(dish: Dish) : Fragment() {
                 else -> portionEntered.toDouble()
             }
         val dIngs: List<Ingredient> = listOf()
+
 
         var d: Dish = Dish(dishToDisplay.id, dIngs, dName)
         d.defaultPortionWeight = dPortion

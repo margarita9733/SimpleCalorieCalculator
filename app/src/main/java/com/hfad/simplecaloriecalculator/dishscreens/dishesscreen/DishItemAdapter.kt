@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.hfad.simplecaloriecalculator.Dish
-import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.databinding.DishItemBinding
 
 
