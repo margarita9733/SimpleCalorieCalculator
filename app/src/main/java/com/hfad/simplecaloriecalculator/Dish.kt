@@ -1,5 +1,7 @@
 package com.hfad.simplecaloriecalculator
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 
 data class Dish(
@@ -15,17 +17,17 @@ data class Dish(
         get() = if (ingredients.isEmpty()) 0.0 else ingredients.sumOf { it.product.proteins * it.portionEntered } / ingredients.sumOf { it.portionEntered }
 
     val fatsPerGram
-        get() =  if (ingredients.isEmpty()) 0.0 else ingredients.sumOf { it.product.fats * it.portionEntered } / ingredients.sumOf { it.portionEntered }
+        get() = if (ingredients.isEmpty()) 0.0 else ingredients.sumOf { it.product.fats * it.portionEntered } / ingredients.sumOf { it.portionEntered }
 
     val carbsPerGram
-        get() =  if (ingredients.isEmpty()) 0.0 else ingredients.sumOf { it.product.carbs * it.portionEntered } / ingredients.sumOf { it.portionEntered }
+        get() = if (ingredients.isEmpty()) 0.0 else ingredients.sumOf { it.product.carbs * it.portionEntered } / ingredients.sumOf { it.portionEntered }
 
     val caloriesPerGram
-        get() =  if (ingredients.isEmpty()) 0.0 else ingredients.sumOf { it.product.calories * it.portionEntered } / ingredients.sumOf { it.portionEntered }
+        get() = if (ingredients.isEmpty()) 0.0 else ingredients.sumOf { it.product.calories * it.portionEntered } / ingredients.sumOf { it.portionEntered }
 
 
     val proteinsPerDefaultPortion
-        get() =  proteinsPerGram * defaultPortionWeight
+        get() = proteinsPerGram * defaultPortionWeight
 
     val fatsPerDefaultPortion
         get() = fatsPerGram * defaultPortionWeight
@@ -41,3 +43,8 @@ data class Dish(
     override fun getCarbsPer100(): Double = carbsPerGram * 100
     override fun getCaloriesPer100(): Double = caloriesPerGram * 100
 }
+
+/*старый класс со списком + отдельный аналогичный класс для entity без списка
+* старый испольуется в слое отображения,
+* аналогичный класс-entity без списка используется в работе с бд
+* один преобразуется в другой, преобразует классы специальный UseCase-класс*/
