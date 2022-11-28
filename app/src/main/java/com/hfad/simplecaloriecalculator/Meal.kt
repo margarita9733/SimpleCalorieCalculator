@@ -4,9 +4,7 @@ import com.hfad.simplecaloriecalculator.mealscreens.FoodToDisplay
 
 class Meal(
     var id: Long = 0,
-    var month: Long = 0,
-    var day: Long = 0,
-    var time: Long = 0,
+    var datetime: Long = 0,
     var food: List<FoodToDisplay> = listOf()
 ) {
     val proteinsTotal get() = food.sumOf { it.getProteinsPerPortion() }

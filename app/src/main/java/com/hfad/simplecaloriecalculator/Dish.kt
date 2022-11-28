@@ -11,7 +11,7 @@ data class Dish(
 ) : Food {
     var defaultPortionWeight: Double = 100.0
 
-    // состав и БЖУК на список продуктов
+    // БЖУК на список продуктов
 
     val proteinsPerGram
         get() = if (ingredients.isEmpty()) 0.0 else ingredients.sumOf { it.product.proteins * it.portionEntered } / ingredients.sumOf { it.portionEntered }

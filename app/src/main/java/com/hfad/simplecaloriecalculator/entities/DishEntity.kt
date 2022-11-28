@@ -1,11 +1,11 @@
-package com.hfad.simplecaloriecalculator
+package com.hfad.simplecaloriecalculator.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "dish_table")
-data class DishE(
+data class DishEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
 
@@ -14,5 +14,4 @@ data class DishE(
 
     @ColumnInfo(name = "default_portion")
     var defaultPortionWeight: Double = 100.0
-
 )
