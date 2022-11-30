@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.productscreens.pickproductfordishscreen
+package com.hfad.simplecaloriecalculator.productscreens.pickingredientscreen
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

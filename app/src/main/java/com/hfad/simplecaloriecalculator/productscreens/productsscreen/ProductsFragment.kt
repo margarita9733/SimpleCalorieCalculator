@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.hfad.simplecaloriecalculator.CalcDatabase
+import com.hfad.simplecaloriecalculator.database.CalcDatabase
 import com.hfad.simplecaloriecalculator.productscreens.editproductscreen.EditProductFragment
 import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.R

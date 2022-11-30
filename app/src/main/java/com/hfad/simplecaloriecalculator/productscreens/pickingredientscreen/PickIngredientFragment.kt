@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.productscreens.pickproductfordishscreen
+package com.hfad.simplecaloriecalculator.productscreens.pickingredientscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

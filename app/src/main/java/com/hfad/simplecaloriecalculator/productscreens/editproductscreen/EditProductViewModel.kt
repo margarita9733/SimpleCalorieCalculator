@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.simplecaloriecalculator.Product
-import com.hfad.simplecaloriecalculator.daos.ProductDao
+import com.hfad.simplecaloriecalculator.database.daos.ProductDao
 import kotlinx.coroutines.launch
 
 class EditProductViewModel(val dao: ProductDao) : ViewModel() {

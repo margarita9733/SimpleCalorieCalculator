@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.daos
+package com.hfad.simplecaloriecalculator.database.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

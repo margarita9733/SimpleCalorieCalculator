@@ -1,30 +1,34 @@
-package com.hfad.simplecaloriecalculator.entities
+package com.hfad.simplecaloriecalculator.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.hfad.simplecaloriecalculator.Product
 
 @Entity(
-    tableName = "dish_product_table",
+    tableName = "meal_dish_table",
     foreignKeys = [
+        ForeignKey(
+            entity = MealEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["meal_id"]
+        ),
         ForeignKey(
             entity = DishEntity::class,
             parentColumns = ["id"],
             childColumns = ["dish_id"]
-        ),
-
-        ForeignKey(
-            entity = Product::class,
-            parentColumns = ["id"],
-            childColumns = ["product_id"]
         )
     ]
 )
-data class DishProductEntity(
+data class MealDishEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+
+    @ColumnInfo(name = "meal_id")
+    val mealId: Long = 0,
+
+    @ColumnInfo(name = "dish_id")
+    val dishId: Long = 0,
 
     @ColumnInfo(name = "weight")
     val weight: Double = 0.0

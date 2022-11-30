@@ -1,4 +1,4 @@
-package com.hfad.simplecaloriecalculator.entities
+package com.hfad.simplecaloriecalculator.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

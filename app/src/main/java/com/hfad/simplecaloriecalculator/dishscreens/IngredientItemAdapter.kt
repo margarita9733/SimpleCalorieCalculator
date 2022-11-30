@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.databinding.IngredientItemBinding
-import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishItemAdapter
 
 class IngredientItemAdapter(
     val itemListener: (ingredient: Ingredient) -> Unit,
     val buttonListener: (ingredient: Ingredient) -> Unit
 ) :
-    ListAdapter<Ingredient, IngredientItemAdapter.IngredientItemViewHolder>(com.hfad.simplecaloriecalculator.productscreens.pickproductfordishscreen.IngredientItemAdapter.IngredientItemViewHolder.IngredientDiffItemCallback()) {
+    ListAdapter<Ingredient, IngredientItemAdapter.IngredientItemViewHolder>(com.hfad.simplecaloriecalculator.productscreens.pickingredientscreen.IngredientItemAdapter.IngredientItemViewHolder.IngredientDiffItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int)
             : IngredientItemViewHolder = IngredientItemViewHolder.inflateFrom(parent)
 

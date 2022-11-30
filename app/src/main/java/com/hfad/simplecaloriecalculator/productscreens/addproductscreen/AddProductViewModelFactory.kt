@@ -2,7 +2,7 @@ package com.hfad.simplecaloriecalculator.productscreens.addproductscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hfad.simplecaloriecalculator.daos.ProductDao
+import com.hfad.simplecaloriecalculator.database.daos.ProductDao
 
 
 class AddProductViewModelFactory(private val dao: ProductDao) : ViewModelProvider.Factory {
