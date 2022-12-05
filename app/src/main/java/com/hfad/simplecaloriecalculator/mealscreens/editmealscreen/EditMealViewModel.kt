@@ -20,8 +20,8 @@ class EditMealViewModel : ViewModel() {
     )
 
     var ingsA: MutableList<Ingredient> = mutableListOf(
-        Ingredient(products[0].id, products[0], 120.0),
-        Ingredient(products[1].id, products[1], 30.0),
+        Ingredient(products[0],  120.0),
+        Ingredient(products[1],  30.0),
         /*Ingredient(products[5].id, products[5], 30.0),
         Ingredient(products[6].id, products[6], 30.0),*/
     )

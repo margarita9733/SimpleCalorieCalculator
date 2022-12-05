@@ -1,22 +1,26 @@
 package com.hfad.simplecaloriecalculator.database.daos
 
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import com.hfad.simplecaloriecalculator.database.entities.DishProductEntity
+
+@Dao
 interface DishProductDao {
-    /*@Insert
-    suspend fun insert(dish: Dish, product: Product): Long
+    @Insert
+    suspend fun insert(dishProductE: DishProductEntity): Long
 
     @Update
-    suspend fun update(dish: Dish, product: Product)
+    suspend fun update(dishProductE: DishProductEntity)
 
     @Delete
-    suspend fun delete(dish: Dish, product: Product)
+    suspend fun delete(dishProductE: DishProductEntity)
 
-    @Query("SELECT * FROM dish_product_table WHERE id = :dishId")
-    fun get(dishId: Long) : LiveData<Dish>
+    @Query("SELECT * FROM dish_product_table ORDER BY id DESC")
+    fun getAll(): LiveData<List<DishProductEntity>>
 
-    @Query("SELECT * FROM dish_table ORDER BY id DESC")
-    fun getAll(): LiveData<List<Dish>>
+    @Query("SELECT * FROM dish_product_table  WHERE dish_id = :dishId ORDER BY id DESC")
+    fun getDishProductsByDish(dishId: Long): LiveData<List<DishProductEntity>>
 
-//  генерировать список и DP и добавлять в таблицу списком
-    @Delete
-    suspend fun deleteAll(dishList: List<Dish>)*/
+    @Insert
+    suspend fun insertAll(dishProductList: List<DishProductEntity>)
 }

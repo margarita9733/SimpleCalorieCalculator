@@ -36,18 +36,18 @@ class AddDishFragment(dish: Dish) : Fragment() {
 //
         }
 
-        binding.buttonAddDish.setOnClickListener {
+       /* binding.buttonAddDish.setOnClickListener {
             viewModel.updateDish(changeDish())
             val toast = Toast.makeText(context, "${dishToDisplay.name} saved", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
-        }
+        }*/
 
 
 
-        binding.buttonCancel.setOnClickListener {
+       /* binding.buttonCancel.setOnClickListener {
             parentFragmentManager.popBackStack()
             viewModel.removeDish(dishToDisplay)
-        }
+        }*/
 
         binding.editTextDishName.setText(dishToDisplay.name)
         binding.editTextDishPortion.setText(dishToDisplay.defaultPortionWeight.toString())

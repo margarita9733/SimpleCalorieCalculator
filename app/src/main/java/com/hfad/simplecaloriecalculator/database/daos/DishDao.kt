@@ -5,6 +5,7 @@ import androidx.room.*
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.database.entities.DishEntity
 
+@Dao
 interface DishDao {
     @Insert
     suspend fun insert(dishE: DishEntity): Long
@@ -16,11 +17,11 @@ interface DishDao {
     suspend fun delete(dishE: DishEntity)
 
     @Query("SELECT * FROM dish_table WHERE id = :dishId")
-    fun getDishById(dishId: Long) : LiveData<Dish>
+    fun getDishById(dishId: Long) : LiveData<DishEntity>
 
     @Query("SELECT * FROM dish_table ORDER BY id DESC")
-    fun getAllById(): LiveData<List<Dish>>
+    fun getAll(): LiveData<List<DishEntity>>
 
     @Delete
-    suspend fun deleteAll(dishList: List<Dish>)
+    suspend fun deleteAll(dishList: List<DishEntity>)
 }

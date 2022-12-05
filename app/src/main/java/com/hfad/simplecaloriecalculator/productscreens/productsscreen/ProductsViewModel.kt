@@ -29,3 +29,13 @@ class ProductsViewModel(val dao: ProductDao) : ViewModel() {
         }
     }
 }
+/*
+
+private var products: List<Product> = listOf<Product>(
+    Product(1, "Творог 5%", 0.17, 0.05, 0.018, 1.21, 100.0),
+    Product(2, "Персик", 0.009, 0.001, 0.113, 0.46, 60.0),
+    Product(3, "Фундук", 0.16, 0.669, 0.09, 7.04, 20.0),
+    Product(4, "Сахар", 0.0, 0.0, 9.97, 3.98, 15.0),
+    Product(5, "Чернослив", 0.023, 0.007, 0.57, 2.31, 30.0),
+
+    )*/

@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.hfad.simplecaloriecalculator.Product
+import com.hfad.simplecaloriecalculator.database.daos.DishDao
+import com.hfad.simplecaloriecalculator.database.daos.DishProductDao
 import com.hfad.simplecaloriecalculator.database.daos.ProductDao
 import com.hfad.simplecaloriecalculator.database.entities.*
 
@@ -20,6 +22,8 @@ import com.hfad.simplecaloriecalculator.database.entities.*
 )
 abstract class CalcDatabase : RoomDatabase() {
     abstract val productDao: ProductDao
+    abstract val dishDao: DishDao
+    abstract val dishProductDao: DishProductDao
 
     companion object {
         @Volatile

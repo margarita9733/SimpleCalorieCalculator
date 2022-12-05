@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class AddProductViewModel(val dao: ProductDao) : ViewModel() {
     fun addToList(product: Product) {
         viewModelScope.launch { dao.insert(product) }
-        Log.i("VM", "product added")
+        Log.i("AddProductVM", "product added")
     }
 
 }

@@ -7,9 +7,10 @@ import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 data class Dish(
     override val id: Long = 0,
     var ingredients: List<Ingredient> = listOf(),
-    override var name: String = "Блюдо $id"
-) : Food {
+    override var name: String = "Блюдо $id",
     var defaultPortionWeight: Double = 100.0
+) : Food {
+
 
     // БЖУК на список продуктов
 

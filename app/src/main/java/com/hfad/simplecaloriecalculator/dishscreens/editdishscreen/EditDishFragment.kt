@@ -38,11 +38,11 @@ class EditDishFragment(dish: Dish) : Fragment() {
         binding.textDishCarbs.setText(getString(R.string.carbs_letter_placeholder, (dishToDisplay.carbsPerGram * 100).format()))
         binding.textDishKcal.setText(getString(R.string.calories_placeholder, (dishToDisplay.caloriesPerGram * 100).format()))
 
-        binding.buttonSaveChanges.setOnClickListener {
+       /* binding.buttonSaveChanges.setOnClickListener {
             viewModel.updateDish(changeDish())
             val toast = Toast.makeText(context, "changes saved", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
-        }
+        }*/
 
         binding.buttonCancel.setOnClickListener {
             parentFragmentManager.popBackStack()
