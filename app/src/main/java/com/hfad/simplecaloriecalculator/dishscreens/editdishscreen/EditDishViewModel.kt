@@ -1,8 +1,9 @@
-package com.hfad.simplecaloriecalculator.dishscreens.adddishscreen
+package com.hfad.simplecaloriecalculator.dishscreens.editdishscreen
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.OnConflictStrategy
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.database.daos.DishDao
 import com.hfad.simplecaloriecalculator.database.daos.DishProductDao
@@ -10,17 +11,28 @@ import com.hfad.simplecaloriecalculator.database.entities.DishEntity
 import com.hfad.simplecaloriecalculator.database.entities.DishProductEntity
 import kotlinx.coroutines.launch
 
-class AddDishViewModel(
-    val daoDish: DishDao,
-    val daoDishProduct: DishProductDao
+class EditDishViewModel(
+     val daoDish: DishDao,
+     val daoDishProduct: DishProductDao
 ) : ViewModel() {
 
-    fun addDish(dish: Dish) {
+    fun updateDishEntity(dish: Dish) {
         viewModelScope.launch {
-            daoDish.insert(dishToDishEntity(dish))
+            daoDish.update(dishToDishEntity(dish))
+        }
+        Log.i("UpdDishVM", "dish updated ${dish.id}")
+    }
+
+    fun insertDishProductEntities(dish: Dish){
+        viewModelScope.launch {
             daoDishProduct.insertAll(dishToDPEntities(dish))
         }
-        Log.i("AddDishVM", "dish added ${dish.id}")
+    }
+
+    fun deleteDishProductEntities(dish: Dish) {
+        viewModelScope.launch {
+            daoDishProduct.deleteAll(dishToDPEntities(dish))
+        }
     }
 
     fun dishToDishEntity(dish: Dish)
@@ -34,5 +46,3 @@ class AddDishViewModel(
         return list.toList()
     }
 }
-
-

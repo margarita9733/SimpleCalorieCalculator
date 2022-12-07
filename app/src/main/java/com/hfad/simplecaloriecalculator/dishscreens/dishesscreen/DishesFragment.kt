@@ -12,18 +12,11 @@ import androidx.lifecycle.Observer
 import com.hfad.simplecaloriecalculator.databinding.FragmentDishesBinding
 import androidx.lifecycle.ViewModelProvider
 import com.hfad.simplecaloriecalculator.Dish
-import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.database.CalcDatabase
-import com.hfad.simplecaloriecalculator.database.daos.DishDao
-import com.hfad.simplecaloriecalculator.database.daos.DishProductDao
-import com.hfad.simplecaloriecalculator.database.daos.ProductDao
 import com.hfad.simplecaloriecalculator.dishscreens.adddishscreen.AddDishFragment
 import com.hfad.simplecaloriecalculator.dishscreens.editdishscreen.EditDishFragment
-import com.hfad.simplecaloriecalculator.productscreens.editproductscreen.EditProductFragment
-import com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductDeletionDialogFragment
-import com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductsViewModel
-import com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductsViewModelFactory
+
 
 
 class DishesFragment : Fragment() {
@@ -32,8 +25,6 @@ class DishesFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var viewModel: DishesViewModel
-    // private var viewModel: DishesViewModel = ViewModelProvider(this).get(DishesViewModel::class.java)
-    //private val viewModel: DishesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,16 +47,15 @@ class DishesFragment : Fragment() {
             this, viewModelFactory
         ).get(DishesViewModel::class.java)
 
-        /*binding.fabGoToAddDishScreen.setOnClickListener {
+        binding.fabGoToAddDishScreen.setOnClickListener {
 
-            val d = Dish(giveId())
-            viewModel.addDish(d)
+            val d = Dish()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, AddDishFragment(d), null)
                 .setReorderingAllowed(true)
                 .addToBackStack("add_dish_show_screen")
                 .commit()
-        }*/
+        }
 
         return view
     }
@@ -99,8 +89,8 @@ class DishesFragment : Fragment() {
     private fun showDishDeletionDialog(dish: Dish) {
         val dialog = DishDeletionDialogFragment(
             onDeleteClicked = {
-                // viewModel.removeDish(dish)
-                val toast = Toast.makeText(context, "deleted an item: ${dish.name} ", Toast.LENGTH_SHORT).show()
+                viewModel.removeDish(dish)
+                val toast = Toast.makeText(context, "deleted an item: ${dish.name}, id ${dish.id} ", Toast.LENGTH_SHORT).show()
             },
             onDismissClicked = {
                 parentFragmentManager.popBackStack()

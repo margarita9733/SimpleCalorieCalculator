@@ -12,6 +12,9 @@ interface DishProductDao {
     @Update
     suspend fun update(dishProductE: DishProductEntity)
 
+    @Update
+    suspend fun updateAll(dishProductEntities: List<DishProductEntity>)
+
     @Delete
     suspend fun delete(dishProductE: DishProductEntity)
 
@@ -20,6 +23,9 @@ interface DishProductDao {
 
     @Query("SELECT * FROM dish_product_table  WHERE dish_id = :dishId ORDER BY id DESC")
     fun getDishProductsByDish(dishId: Long): LiveData<List<DishProductEntity>>
+
+    @Delete
+    suspend fun deleteAll(dishProductList: List<DishProductEntity>)
 
     @Insert
     suspend fun insertAll(dishProductList: List<DishProductEntity>)

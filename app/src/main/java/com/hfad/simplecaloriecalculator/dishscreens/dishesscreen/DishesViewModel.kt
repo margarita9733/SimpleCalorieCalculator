@@ -1,11 +1,7 @@
 package com.hfad.simplecaloriecalculator.dishscreens.dishesscreen
 
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.database.daos.DishDao
@@ -14,8 +10,8 @@ import com.hfad.simplecaloriecalculator.database.daos.ProductDao
 import com.hfad.simplecaloriecalculator.database.entities.DishEntity
 import com.hfad.simplecaloriecalculator.database.entities.DishProductEntity
 import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
-import androidx.lifecycle.Observer
 import kotlinx.coroutines.launch
+import java.nio.file.Files.delete
 
 class DishesViewModel(
     val dishDao: DishDao,
@@ -31,31 +27,18 @@ class DishesViewModel(
     init {
         allDishEntities.observeForever {
             it?.let {
-                _dishes.value = getAllDishes()
+                _dishes.value = getAllDishes(it)
             }
         }
     }
 
-
-    /*Vm.food.observe(viewLifecycleOwner, Observer {
-        it?.let {
-            adapter.submitList(it)
-        }
-    }*/
-
-    /*Vm.food.observe(viewLifecycleOwner, Observer {
-        it?.let {
-            adapter.submitList(it)
-        }
-    }*/
-
-
-    fun getAllDishes(): List<Dish> {  // как во всех этих методах
+    // перенести в Use Case
+    fun getAllDishes(dishEntities: List<DishEntity>): List<Dish> {  // как во всех этих методах
         // будет работать LD для уведомления?
         Log.i("DishesVM", "getAllDishes start")
 
         var dishesToReturn: MutableList<Dish> = mutableListOf()
-        val dishEntities: List<DishEntity> = dishDao.getAll().value ?: listOf()
+        //val dishEntities: List<DishEntity> = dishDao.getAll().value ?: listOf()
 
         for (dishEntity in dishEntities) {
             dishesToReturn.add(getDish(dishEntity))
@@ -89,21 +72,37 @@ class DishesViewModel(
             dishProductE.weight
         )
     }
-}
-/*fun removeDish(dish: Dish) {
-    var listToChange = dishesToDisplay.toMutableList()
-    val i = listToChange.indexOfFirst { it.id == dish.id }
-    listToChange.removeAt(i)
-    dishesToDisplay = listToChange.toList()
-    _dishes.value = dishesToDisplay
-}
+    // ^перенести в UseCase
+    ////////////////////////////////
 
-fun addDish(dish: Dish) {
-    var listToChange = dishesToDisplay.toMutableList()
-    listToChange.add(dish)
-    dishesToDisplay = listToChange.toList()
-    _dishes.value = dishesToDisplay
+    fun dishToDishEntity(dish: Dish)
+            : DishEntity = DishEntity(dish.id, dish.name, dish.defaultPortionWeight)
+
+    fun dishToDPEntities(dish: Dish): List<DishProductEntity> {
+        val list: MutableList<DishProductEntity> = mutableListOf()
+        for (i in dish.ingredients) {
+            list.add(DishProductEntity(0, i.product.id, dish.id, i.portionEntered))
+        }
+        return list.toList()
+    }
+
+    fun removeDish(dish: Dish) {
+        val dishEntityToDelete = dishToDishEntity(dish)
+        val dishProductItemsToDelete = dishToDPEntities(dish)
+
+
+        viewModelScope.launch {
+            dishDao.delete(dishEntityToDelete)
+            dishProductDao.deleteAll(dishProductItemsToDelete)
+        }
+
+    }
+
+
 }
+/*
+
+
 
 fun updateDish(dish: Dish) {
     var listToChange = dishesToDisplay.toMutableList()

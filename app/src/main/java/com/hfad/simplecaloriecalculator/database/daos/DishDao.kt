@@ -17,11 +17,16 @@ interface DishDao {
     suspend fun delete(dishE: DishEntity)
 
     @Query("SELECT * FROM dish_table WHERE id = :dishId")
-    fun getDishById(dishId: Long) : LiveData<DishEntity>
+    fun getDishById(dishId: Long): LiveData<DishEntity>
 
     @Query("SELECT * FROM dish_table ORDER BY id DESC")
     fun getAll(): LiveData<List<DishEntity>>
 
     @Delete
     suspend fun deleteAll(dishList: List<DishEntity>)
+
+    @Query("SELECT * FROM dish_table ORDER BY id DESC")
+    suspend fun getAllSync(): List<DishEntity>
+
+
 }
