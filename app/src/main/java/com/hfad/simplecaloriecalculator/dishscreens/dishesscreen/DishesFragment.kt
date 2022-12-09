@@ -18,7 +18,6 @@ import com.hfad.simplecaloriecalculator.dishscreens.adddishscreen.AddDishFragmen
 import com.hfad.simplecaloriecalculator.dishscreens.editdishscreen.EditDishFragment
 
 
-
 class DishesFragment : Fragment() {
 
     private var _binding: FragmentDishesBinding? = null
@@ -33,41 +32,41 @@ class DishesFragment : Fragment() {
         _binding = FragmentDishesBinding.inflate(inflater, container, false)
         val view = binding.root
 
-
         val application = requireNotNull(this.activity).application
-
         val dbInstance = CalcDatabase.getInstance(application)
-
         val productDao = dbInstance.productDao
         val dishDao = dbInstance.dishDao
         val dishProductDao = dbInstance.dishProductDao
-
         val viewModelFactory = DishesViewModelFactory(dishDao, dishProductDao, productDao)
         viewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(DishesViewModel::class.java)
 
+        viewModel.triggerNavigationToEditDish.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, EditDishFragment(it, true), null)
+                    .setReorderingAllowed(true)
+                    .addToBackStack("edit_dish_show_screen")
+                    .commit()
+                viewModel.onNavigationEnded()
+            }
+        })
+
         binding.fabGoToAddDishScreen.setOnClickListener {
-
-            val d = Dish()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, AddDishFragment(d), null)
-                .setReorderingAllowed(true)
-                .addToBackStack("add_dish_show_screen")
-                .commit()
+            viewModel.addDish(Dish())
         }
-
         return view
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val adapter = DishItemAdapter({ dish ->
             showDishDeletionDialog(dish)
         }, { dish ->
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, EditDishFragment(dish), null)
+                .replace(R.id.fragment_container_view, EditDishFragment(dish.id, false), null)
                 .setReorderingAllowed(true)
                 .addToBackStack("edit_dish_show_screen")
                 .commit()

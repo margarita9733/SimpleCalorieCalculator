@@ -1,5 +1,6 @@
 package com.hfad.simplecaloriecalculator.dishscreens.editdishscreen
 
+import android.os.Build.VERSION_CODES.O
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,22 +9,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.database.CalcDatabase
 import com.hfad.simplecaloriecalculator.databinding.FragmentEditDishBinding
 import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesViewModel
+import kotlinx.coroutines.launch
 import java.util.*
 
-class EditDishFragment(dish: Dish) : Fragment() {
+class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean) : Fragment() {
 
     private var _binding: FragmentEditDishBinding? = null
     private val binding get() = _binding!!
 
-    val dishToDisplay: Dish = dish
 
     lateinit var viewModel: EditDishViewModel
+    lateinit var dishToDisplay: Dish
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,37 +37,45 @@ class EditDishFragment(dish: Dish) : Fragment() {
         var view = binding.root
 
         val application = requireNotNull(this.activity).application
-
         val dbInstance = CalcDatabase.getInstance(application)
-
         val dishDao = dbInstance.dishDao
         val dishProductDao = dbInstance.dishProductDao
-
-        val viewModelFactory = EditDishViewModelFactory(dishDao, dishProductDao)
+        val productDao = dbInstance.productDao
+        val viewModelFactory = EditDishViewModelFactory(dishDao, dishProductDao, productDao)
         viewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(EditDishViewModel::class.java)
 
-        // val viewModel: DishesViewModel by activityViewModels()
 
-        binding.editTextDishName.setText(dishToDisplay.name)
-        binding.editTextDishPortion.setText(dishToDisplay.defaultPortionWeight.toString())
-        binding.textDishProteins.setText(getString(R.string.proteins_letter_placeholder, (dishToDisplay.proteinsPerGram * 100).format()))
-        binding.textDishFats.setText(getString(R.string.fats_letter_placeholder, (dishToDisplay.fatsPerGram * 100).format()))
-        binding.textDishCarbs.setText(getString(R.string.carbs_letter_placeholder, (dishToDisplay.carbsPerGram * 100).format()))
-        binding.textDishKcal.setText(getString(R.string.calories_placeholder, (dishToDisplay.caloriesPerGram * 100).format()))
+        viewModel.getDishById(dishId)
+        viewModel.dish.observeForever {
+            it?.let {
+                dishToDisplay = it
+                binding.editTextDishName.setText(dishToDisplay.name)
+                binding.editTextDishPortion.setText(dishToDisplay.defaultPortionWeight.toString())
+                binding.textDishProteins.setText(getString(R.string.proteins_letter_placeholder, (dishToDisplay.proteinsPerGram * 100).format()))
+                binding.textDishFats.setText(getString(R.string.fats_letter_placeholder, (dishToDisplay.fatsPerGram * 100).format()))
+                binding.textDishCarbs.setText(getString(R.string.carbs_letter_placeholder, (dishToDisplay.carbsPerGram * 100).format()))
+                binding.textDishKcal.setText(getString(R.string.calories_placeholder, (dishToDisplay.caloriesPerGram * 100).format()))
+            }
+        }
 
         binding.buttonSaveChanges.setOnClickListener {
-            val updatedDish = changeDish()
+            val updatedDish = changeDish(dishToDisplay)
             viewModel.updateDishEntity(updatedDish)
             viewModel.deleteDishProductEntities(dishToDisplay)
             viewModel.insertDishProductEntities(updatedDish)
-            val toast = Toast.makeText(context, "changes saved", Toast.LENGTH_SHORT).show()
+            val toast = Toast.makeText(context, "changes saved oldId${dishToDisplay.id} newId${updatedDish.id}", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
         }
 
         binding.buttonCancel.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            if (dishIsNew) {
+                viewModel.deleteDishEntity(dishToDisplay)
+                parentFragmentManager.popBackStack()
+            } else {
+                parentFragmentManager.popBackStack()
+            }
         }
 
         return view
@@ -71,10 +83,10 @@ class EditDishFragment(dish: Dish) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // rw adapter
     }
 
-    fun changeDish(): Dish {
+    fun changeDish(dish: Dish): Dish {
         val nameEntered = binding.editTextDishName.text.toString()
         val portionEntered = binding.editTextDishPortion.getText().toString()
 
@@ -92,9 +104,10 @@ class EditDishFragment(dish: Dish) : Fragment() {
             }
         val dIngs: List<Ingredient> = listOf()
 
-
-        var d: Dish = Dish(dishToDisplay.id, dIngs, dName,dPortion)
-        return d
+        dish.name = dName
+        dish.defaultPortionWeight = dPortion
+        dish.ingredients = dIngs
+        return dish
     }
 
     fun Double.format() = "%.2f".format(Locale.US, this)

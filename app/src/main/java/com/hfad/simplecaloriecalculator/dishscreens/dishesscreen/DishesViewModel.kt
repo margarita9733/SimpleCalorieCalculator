@@ -32,6 +32,17 @@ class DishesViewModel(
         }
     }
 
+    private val _triggerNavigationToEditDish = MutableLiveData<Long?>(null)
+    val triggerNavigationToEditDish: LiveData<Long?> get() = _triggerNavigationToEditDish
+
+    fun onNavigationEnded() { _triggerNavigationToEditDish.value = null}
+
+    fun addDish(dish: Dish) {
+        viewModelScope.launch {
+            _triggerNavigationToEditDish.value = dishDao.insert(dishToDishEntity(dish))
+        }
+    }
+
     // перенести в Use Case
     fun getAllDishes(dishEntities: List<DishEntity>): List<Dish> {  // как во всех этих методах
         // будет работать LD для уведомления?

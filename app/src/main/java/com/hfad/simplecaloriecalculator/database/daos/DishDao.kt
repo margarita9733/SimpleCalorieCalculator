@@ -28,5 +28,8 @@ interface DishDao {
     @Query("SELECT * FROM dish_table ORDER BY id DESC")
     suspend fun getAllSync(): List<DishEntity>
 
+    @Query("SELECT * FROM dish_table WHERE id = :dishId")
+    suspend fun getDishEntityByIdSync(dishId: Long): DishEntity
+
 
 }
