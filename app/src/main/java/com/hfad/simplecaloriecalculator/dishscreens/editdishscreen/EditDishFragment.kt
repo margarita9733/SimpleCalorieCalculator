@@ -1,6 +1,6 @@
 package com.hfad.simplecaloriecalculator.dishscreens.editdishscreen
 
-import android.os.Build.VERSION_CODES.O
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,7 +15,11 @@ import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.database.CalcDatabase
 import com.hfad.simplecaloriecalculator.databinding.FragmentEditDishBinding
 import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
+import com.hfad.simplecaloriecalculator.dishscreens.IngredientItemAdapter
+import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishDeletionDialogFragment
+import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesFragment
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesViewModel
+import com.hfad.simplecaloriecalculator.productscreens.pickingredientscreen.PickIngredientFragment
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -46,6 +50,17 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
             this, viewModelFactory
         ).get(EditDishViewModel::class.java)
 
+        val adapter = IngredientItemAdapter({ ingredient ->
+            showIngredientDeletionDialog(ingredient)
+        }, { dish ->
+            /* parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, EditDishFragment(dish.id, false), null)
+                .setReorderingAllowed(true)
+               .addToBackStack("edit_dish_show_screen")
+               .commit()*/
+        })
+
+        binding.ingredientsList.adapter = adapter
 
         viewModel.getDishById(dishId)
         viewModel.dish.observeForever {
@@ -57,14 +72,15 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
                 binding.textDishFats.setText(getString(R.string.fats_letter_placeholder, (dishToDisplay.fatsPerGram * 100).format()))
                 binding.textDishCarbs.setText(getString(R.string.carbs_letter_placeholder, (dishToDisplay.carbsPerGram * 100).format()))
                 binding.textDishKcal.setText(getString(R.string.calories_placeholder, (dishToDisplay.caloriesPerGram * 100).format()))
+                adapter.submitList(it.ingredients)
             }
         }
 
         binding.buttonSaveChanges.setOnClickListener {
             val updatedDish = changeDish(dishToDisplay)
-            viewModel.updateDishEntity(updatedDish)
-            viewModel.deleteDishProductEntities(dishToDisplay)
-            viewModel.insertDishProductEntities(updatedDish)
+            viewModel.updateDishEntity(updatedDish)                 //
+            viewModel.deleteDishProductEntities(dishToDisplay)      // обновить таблицы в бд
+            viewModel.insertDishProductEntities(updatedDish)        //
             val toast = Toast.makeText(context, "changes saved oldId${dishToDisplay.id} newId${updatedDish.id}", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
         }
@@ -78,12 +94,37 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
             }
         }
 
+        binding.fabGoToSelectProductScreen.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, PickIngredientFragment(dishToDisplay.id), null)
+                .setReorderingAllowed(true)
+                .addToBackStack("edit_dish_show_screen")
+                .commit()
+        }
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // rw adapter
+        /*
+             val adapter = IngredientsListItemAdapter({ ingredient ->
+            showIngredientDeletionDialog(ingredient)
+        }, { dish ->
+           // parentFragmentManager.beginTransaction()
+            //    .replace(R.id.fragment_container_view, EditDishFragment(dish.id, false), null)
+            //    .setReorderingAllowed(true)
+             //   .addToBackStack("edit_dish_show_screen")
+             //   .commit()
+        })
+
+        binding.ingredientsList.adapter = adapter
+        viewModel.dish.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it.ingredients)                 ^^^^^
+            }
+        })*/
     }
 
     fun changeDish(dish: Dish): Dish {
@@ -115,5 +156,22 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showIngredientDeletionDialog(ingredient: Ingredient) {
+        val dialog = DishDeletionDialogFragment(
+            onDeleteClicked = {
+                viewModel.removeIngredient(ingredient)
+                val toast = Toast.makeText(context, "deleted an item: ${ingredient.name}, id ${ingredient.id} ", Toast.LENGTH_SHORT).show()
+            },
+            onDismissClicked = {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, DishesFragment(), null)
+                    .setReorderingAllowed(true)
+                   .addToBackStack("edit_dish_show_screen")
+                   .commit()
+            }
+        )
+        dialog.show(requireActivity().supportFragmentManager, "tag")
     }
 }

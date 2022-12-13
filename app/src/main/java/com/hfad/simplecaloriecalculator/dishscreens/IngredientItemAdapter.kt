@@ -11,7 +11,7 @@ class IngredientItemAdapter(
     val itemListener: (ingredient: Ingredient) -> Unit,
     val buttonListener: (ingredient: Ingredient) -> Unit
 ) :
-    ListAdapter<Ingredient, IngredientItemAdapter.IngredientItemViewHolder>(com.hfad.simplecaloriecalculator.productscreens.pickingredientscreen.IngredientItemAdapter.IngredientItemViewHolder.IngredientDiffItemCallback()) {
+    ListAdapter<Ingredient, IngredientItemAdapter.IngredientItemViewHolder>(com.hfad.simplecaloriecalculator.dishscreens.IngredientItemAdapter.IngredientItemViewHolder.IngredientDiffItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int)
             : IngredientItemViewHolder = IngredientItemViewHolder.inflateFrom(parent)
 

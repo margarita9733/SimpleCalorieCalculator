@@ -1,20 +1,17 @@
 package com.hfad.simplecaloriecalculator.dishscreens.dishesscreen
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.hfad.simplecaloriecalculator.databinding.FragmentDishesBinding
 import androidx.lifecycle.ViewModelProvider
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.database.CalcDatabase
-import com.hfad.simplecaloriecalculator.dishscreens.adddishscreen.AddDishFragment
 import com.hfad.simplecaloriecalculator.dishscreens.editdishscreen.EditDishFragment
 
 

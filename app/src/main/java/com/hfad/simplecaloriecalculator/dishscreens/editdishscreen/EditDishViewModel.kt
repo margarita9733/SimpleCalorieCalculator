@@ -30,6 +30,10 @@ class EditDishViewModel(
         Log.i("AddDishVM", "dish added ${dish.id}")
     }
 
+    fun removeIngredient(ingredient: Ingredient) {
+
+    }
+
     fun updateDishEntity(dish: Dish) {
         viewModelScope.launch {
             daoDish.update(dishToDishEntity(dish))
