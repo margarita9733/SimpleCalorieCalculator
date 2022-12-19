@@ -64,14 +64,10 @@ class AddProductFragment : Fragment() {
         val pKcal = if (kcalEntered == "") 0.0 else kcalEntered.toDouble()
         val pPortion = if (portionEntered == "") 100.0 else portionEntered.toDouble()
 
-        // val pId: Long = giveId()
-
         val p = Product(0, pName, pProteins / 100, pFats / 100, pCarbs / 100, pKcal / 100, pPortion)
 
         return p
     }
-
-    //fun giveId(): Long = (viewModel.lastElementId() + 1).toLong()
 
     override fun onDestroyView() {
         super.onDestroyView()

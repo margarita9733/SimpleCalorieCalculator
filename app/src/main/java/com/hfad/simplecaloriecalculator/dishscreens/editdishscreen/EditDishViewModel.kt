@@ -80,33 +80,22 @@ class EditDishViewModel(
 
     fun getDishById(dishId: Long) {
         var dishEntity: DishEntity
+        var dpEntities: List<DishProductEntity>
+        var dishIngredients: MutableList<Ingredient> = mutableListOf()
         viewModelScope.launch {
             dishEntity = daoDish.getDishEntityByIdSync(dishId)
+            dpEntities = daoDishProduct.getIngredientsByDishIdSync(dishId)
+            for (item in dpEntities) dishIngredients.add(Ingredient(daoProduct.getProductByIdSync(item.productId), item.weight))
+
             _dish.value = Dish(
                 dishEntity.id,
-                getIngredientsList(dishEntity.id),
+                dishIngredients.toList(),
                 dishEntity.name,
                 dishEntity.defaultPortionWeight
             )
         }
     }
 
-    fun getIngredientsList(dishId: Long): List<Ingredient> {
-
-        val ingsList: MutableList<Ingredient> = mutableListOf()
-        val dPEntities: List<DishProductEntity> =
-            daoDishProduct.getDishProductsByDish(dishId).value ?: listOf()
-
-        for (entity in dPEntities) ingsList.add(getIngredient(entity))
-
-        return ingsList.toList()
-    }
-
-    fun getIngredient(dishProductE: DishProductEntity): Ingredient {
-        return Ingredient(
-            (daoProduct.get(dishProductE.productId)).value ?: Product(),
-            dishProductE.weight
-        )
-    }
-    //
+    // все методы асинхронные в одной корутине, возвращается один готовый объект
+    // как в с Dish в фрагменте
 }

@@ -2,6 +2,7 @@ package com.hfad.simplecaloriecalculator.database.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.hfad.simplecaloriecalculator.database.entities.DishEntity
 import com.hfad.simplecaloriecalculator.database.entities.DishProductEntity
 
 @Dao
@@ -29,4 +30,10 @@ interface DishProductDao {
 
     @Insert
     suspend fun insertAll(dishProductList: List<DishProductEntity>)
+
+    @Query("SELECT * FROM dish_product_table ORDER BY id DESC")
+    suspend fun getAllSync(): List<DishProductEntity>
+
+    @Query("SELECT * FROM dish_product_table WHERE dish_id = :dishToFindId ORDER BY id DESC")
+    suspend fun getIngredientsByDishIdSync(dishToFindId: Long): List<DishProductEntity>
 }

@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.database.CalcDatabase
 import com.hfad.simplecaloriecalculator.databinding.FragmentPickIngredientBinding
 import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
-import com.hfad.simplecaloriecalculator.dishscreens.IngredientItemAdapter
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishDeletionDialogFragment
-import com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductItemAdapter
+import com.hfad.simplecaloriecalculator.productscreens.pickingredientscreen.ingredientweightbottomsheet.IngredientWeightBottomSheetFragment
 
 class PickIngredientFragment(var dishId: Long) : Fragment() {
 
@@ -45,8 +43,8 @@ class PickIngredientFragment(var dishId: Long) : Fragment() {
         val adapter = ProductAsIngItemAdapter { ingredient ->
             Toast.makeText(context, "item ${ingredient.name} ${ingredient.id} clicked", Toast.LENGTH_SHORT).show()
 
-            val modalBottomSheet = IngredientWeightBottomSheet()
-            modalBottomSheet.show(parentFragmentManager, IngredientWeightBottomSheet.TAG)
+            val modalBottomSheet = IngredientWeightBottomSheetFragment(dishId, ingredient.id)
+            modalBottomSheet.show(parentFragmentManager, IngredientWeightBottomSheetFragment.TAG)
 
         }
 

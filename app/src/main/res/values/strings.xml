@@ -38,7 +38,7 @@
     <string name="product_default_placeholder">Продукт %1$s</string>
     <string name="dish_default_placeholder">Блюдо %1$s</string>
     <string name="ingredients">Ингредиенты: </string>
-    <string name="weight_in_grams">Вес(г): </string>
+    <string name="weight_in_grams">Количество продукта в блюде(в граммах):</string>
     <string name="ok">OK </string>
     <string name="button_back">Назад</string>
 

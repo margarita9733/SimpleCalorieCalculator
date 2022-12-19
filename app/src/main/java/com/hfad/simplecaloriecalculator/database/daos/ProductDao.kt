@@ -3,6 +3,7 @@ package com.hfad.simplecaloriecalculator.database.daos
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.hfad.simplecaloriecalculator.Product
+import com.hfad.simplecaloriecalculator.database.entities.DishProductEntity
 
 @Dao
 interface ProductDao {
@@ -23,5 +24,8 @@ interface ProductDao {
 
     @Delete
     suspend fun deleteAll(productList: List<Product>)
+
+    @Query("SELECT * FROM product_table WHERE id = :productToFindId ORDER BY id DESC")
+    suspend fun getProductByIdSync(productToFindId: Long): Product
 
 }

@@ -52,7 +52,8 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
 
         val adapter = IngredientItemAdapter({ ingredient ->
             showIngredientDeletionDialog(ingredient)
-        }, { dish ->
+        }, { ingredient ->
+            val toast = Toast.makeText(context, "ingredient ${id} tapped", Toast.LENGTH_SHORT).show()
             /* parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, EditDishFragment(dish.id, false), null)
                 .setReorderingAllowed(true)
@@ -72,6 +73,7 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
                 binding.textDishFats.setText(getString(R.string.fats_letter_placeholder, (dishToDisplay.fatsPerGram * 100).format()))
                 binding.textDishCarbs.setText(getString(R.string.carbs_letter_placeholder, (dishToDisplay.carbsPerGram * 100).format()))
                 binding.textDishKcal.setText(getString(R.string.calories_placeholder, (dishToDisplay.caloriesPerGram * 100).format()))
+
                 adapter.submitList(it.ingredients)
             }
         }
@@ -105,10 +107,10 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // rw adapter
-        /*
+        *//*
              val adapter = IngredientsListItemAdapter({ ingredient ->
             showIngredientDeletionDialog(ingredient)
         }, { dish ->
@@ -124,8 +126,8 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
             it?.let {
                 adapter.submitList(it.ingredients)                 ^^^^^
             }
-        })*/
-    }
+        })*//*
+    }*/
 
     fun changeDish(dish: Dish): Dish {
         val nameEntered = binding.editTextDishName.text.toString()
@@ -168,8 +170,8 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_view, DishesFragment(), null)
                     .setReorderingAllowed(true)
-                   .addToBackStack("edit_dish_show_screen")
-                   .commit()
+                    .addToBackStack("edit_dish_show_screen")
+                    .commit()
             }
         )
         dialog.show(requireActivity().supportFragmentManager, "tag")

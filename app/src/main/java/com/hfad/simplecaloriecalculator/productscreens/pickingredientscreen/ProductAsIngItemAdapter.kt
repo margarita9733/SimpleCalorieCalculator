@@ -38,9 +38,9 @@ class ProductAsIngItemAdapter(
             binding.productName.text = item.name
             binding.productDefaultWeight.text = "Вес: " + item.portionWeight.format() + " г"
             binding.productProteins.text = "Б: " + item.proteinsPerPortion.format() + " г"
-            binding.productFats.text = "Б: " + item.fatsPerPortion.format() + " г"
-            binding.productCarbs.text = "Б: " + item.carbsPerPortion.format() + " г"
-            binding.productPortionCalories.text = "Б: " + item.caloriesPerPortion.format() + " г"
+            binding.productFats.text = "Ж: " + item.fatsPerPortion.format() + " г"
+            binding.productCarbs.text = "У: " + item.carbsPerPortion.format() + " г"
+            binding.productPortionCalories.text = "ккал: " + item.caloriesPerPortion.format() + " г"
             binding.root.setOnClickListener { itemLstnr(item) }
         }
 

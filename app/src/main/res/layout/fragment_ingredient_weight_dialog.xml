@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_16"
         android:text="@string/weight_in_grams"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,11 +20,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:baselineAligned="false"
         android:hint="@string/weight"
         android:orientation="horizontal"
         android:padding="8dp"
-        app:layout_constraintStart_toStartOf="@id/text_weight_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_weight_info">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -30,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:minWidth="100dp"
             android:minHeight="48dp" />
 
@@ -44,7 +47,7 @@
         android:layout_marginVertical="@dimen/dp_8"
         android:minHeight="48dp"
         android:text="@string/button_back"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_ok"
         app:layout_constraintTop_toBottomOf="@id/text_input_layout_ingredient_weight" />
 
     <Button
@@ -55,7 +58,7 @@
         android:layout_marginVertical="@dimen/dp_8"
         android:minHeight="48dp"
         android:text="@string/ok"
-        app:layout_constraintStart_toEndOf="@id/button_back"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_input_layout_ingredient_weight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
