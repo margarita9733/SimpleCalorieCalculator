@@ -20,10 +20,14 @@ class DishesViewModel(
 ) : ViewModel() {
 
     private val allDishEntities: LiveData<List<DishEntity>> = dishDao.getAll()
+    // private val allDishProductEntities: LiveData<List<DishProductEntity>> = dishProductDao.getAll()
 
     private var _dishes: MutableLiveData<List<Dish>?> = MutableLiveData(null)
     val dishes: LiveData<List<Dish>?> get() = _dishes
 
+    /*  private var _dishes_contents: MutableLiveData<List<DishProductEntity>?> = MutableLiveData(null)
+      val dishes_contents: LiveData<List<DishProductEntity>?> get() = _dishes_contents
+  */
     init {
         allDishEntities.observeForever {
             it?.let {
@@ -35,7 +39,9 @@ class DishesViewModel(
     private val _triggerNavigationToEditDish = MutableLiveData<Long?>(null)
     val triggerNavigationToEditDish: LiveData<Long?> get() = _triggerNavigationToEditDish
 
-    fun onNavigationEnded() { _triggerNavigationToEditDish.value = null}
+    fun onNavigationEnded() {
+        _triggerNavigationToEditDish.value = null
+    }
 
     fun addDish(dish: Dish) {
         viewModelScope.launch {
@@ -43,9 +49,8 @@ class DishesViewModel(
         }
     }
 
-    // перенести в Use Case
-    fun getAllDishes(dishEntities: List<DishEntity>): List<Dish> {  // как во всех этих методах
-        // будет работать LD для уведомления?
+    // перенести в Use Case \/
+    fun getAllDishes(dishEntities: List<DishEntity>): List<Dish> {
         Log.i("DishesVM", "getAllDishes start")
 
         var dishesToReturn: MutableList<Dish> = mutableListOf()
@@ -101,7 +106,6 @@ class DishesViewModel(
         val dishEntityToDelete = dishToDishEntity(dish)
         val dishProductItemsToDelete = dishToDPEntities(dish)
 
-
         viewModelScope.launch {
             dishDao.delete(dishEntityToDelete)
             dishProductDao.deleteAll(dishProductItemsToDelete)
@@ -111,21 +115,6 @@ class DishesViewModel(
 
 
 }
-/*
 
-
-
-fun updateDish(dish: Dish) {
-    var listToChange = dishesToDisplay.toMutableList()
-    val dishToUpdate = listToChange.indexOfFirst { it.id == dish.id }
-    listToChange[dishToUpdate] = dish
-    dishesToDisplay = listToChange.toList()
-    _dishes.value = dishesToDisplay
-}
-
-fun lastDishId(): Long {
-    return if (dishesToDisplay.lastIndex == -1) 0 else dishesToDisplay[dishesToDisplay.lastIndex].id
-
-}*/
 
 

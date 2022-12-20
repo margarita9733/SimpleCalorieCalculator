@@ -67,11 +67,7 @@ class PickIngredientFragment(var dishId: Long) : Fragment() {
             onDeleteClicked = {
                 // viewModel.removeIngredient(ingredient)
                 val toast = Toast.makeText(context, "deleted an item: ${ingredient.name}, id ${ingredient.id} ", Toast.LENGTH_SHORT).show()
-            },
-            onDismissClicked = {
-                parentFragmentManager.popBackStack()
-            }
-        )
+            })
         dialog.show(requireActivity().supportFragmentManager, "tag")
     }
 }

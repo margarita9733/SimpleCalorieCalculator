@@ -21,9 +21,6 @@ class ProductsFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var viewModel: ProductsViewModel
-    //private val viewModel: ProductsViewModel by activityViewModels()
-    //val application = requireActivity()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,9 +38,6 @@ class ProductsFragment : Fragment() {
 
 
         binding.fabGoToAddProductScreen.setOnClickListener {
-            // var someProduct = Product(0, "Творог 5%", 0.17, 0.05, 0.018, 1.21, 100.0)
-            //viewModel.clearBase()
-
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, AddProductFragment::class.java, null)
                 .setReorderingAllowed(true)
@@ -85,11 +79,7 @@ class ProductsFragment : Fragment() {
             onDeleteClicked = {
                 viewModel.removeFromList(product)
                 val toast = Toast.makeText(context, "deleted an item: ${product.name} ${product.id} ", Toast.LENGTH_SHORT).show()
-            },
-            onDismissClicked = {
-                parentFragmentManager.popBackStack()
-            }
-        )
+            })
         dialog.show(requireActivity().supportFragmentManager, "tag")
     }
 }

@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import com.hfad.simplecaloriecalculator.databinding.IngredientItemBinding
 
 class IngredientItemAdapter(
-    val itemListener: (ingredient: Ingredient) -> Unit,
-    val buttonListener: (ingredient: Ingredient) -> Unit
+    val buttonListener: (ingredient: Ingredient) -> Unit,
+    val itemListener: (ingredient: Ingredient) -> Unit
 ) :
     ListAdapter<Ingredient, IngredientItemAdapter.IngredientItemViewHolder>(com.hfad.simplecaloriecalculator.dishscreens.IngredientItemAdapter.IngredientItemViewHolder.IngredientDiffItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, ViewType: Int)
@@ -32,11 +32,8 @@ class IngredientItemAdapter(
 
         fun bind(item: Ingredient, itemListener: (ingredient: Ingredient) -> Unit, buttonListener: (ingredient: Ingredient) -> Unit) {
             binding.ingredientName.text = item.name
-            binding.ingredientWeight.text = "Вес: " + item.portionEntered.format() + "г"
-            binding.ingredientProteins.text = "Б: " + item.getProteinsPerPortion().format() + " г"
-            binding.ingredientFats.text = "Ж: " + item.getFatsPerPortion().format() + " г"
-            binding.ingredientCarbs.text = "У: " + item.getCarbsPerPortion().format() + " г"
-            binding.ingredientCalories.text = "ккал: " + item.getCaloriesPerPortion().format() + " г"
+            binding.ingredientWeight.text = item.portionEntered.format() + "г"
+            binding.ingredientCalories.text = "ккал: " + item.getCaloriesPerPortion().format()
             binding.deleteIngredientButton.setOnClickListener { buttonListener(item) }
             binding.root.setOnClickListener { itemListener(item) }
 

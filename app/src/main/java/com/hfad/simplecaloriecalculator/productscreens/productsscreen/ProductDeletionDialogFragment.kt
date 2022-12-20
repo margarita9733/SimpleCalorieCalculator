@@ -8,8 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.hfad.simplecaloriecalculator.R
 
 class ProductDeletionDialogFragment(
-    private val onDeleteClicked: () -> Unit,
-    private val onDismissClicked: () -> Unit
+    private val onDeleteClicked: () -> Unit
 ) : DialogFragment() {
 
     override fun onAttach(context: Context) {
@@ -23,7 +22,7 @@ class ProductDeletionDialogFragment(
                 onDeleteClicked()
             }
             .setNegativeButton(getString(R.string.button_cancel)) { _, _ ->
-                onDismissClicked()
+                dismiss()
             }
             .create()
 

@@ -28,7 +28,6 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
     private var _binding: FragmentEditDishBinding? = null
     private val binding get() = _binding!!
 
-
     lateinit var viewModel: EditDishViewModel
     lateinit var dishToDisplay: Dish
 
@@ -53,7 +52,7 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
         val adapter = IngredientItemAdapter({ ingredient ->
             showIngredientDeletionDialog(ingredient)
         }, { ingredient ->
-            val toast = Toast.makeText(context, "ingredient ${id} tapped", Toast.LENGTH_SHORT).show()
+            val toast = Toast.makeText(context, "ingredient ${ingredient.id} tapped", Toast.LENGTH_SHORT).show()
             /* parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, EditDishFragment(dish.id, false), null)
                 .setReorderingAllowed(true)
@@ -107,28 +106,6 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
         return view
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // rw adapter
-        *//*
-             val adapter = IngredientsListItemAdapter({ ingredient ->
-            showIngredientDeletionDialog(ingredient)
-        }, { dish ->
-           // parentFragmentManager.beginTransaction()
-            //    .replace(R.id.fragment_container_view, EditDishFragment(dish.id, false), null)
-            //    .setReorderingAllowed(true)
-             //   .addToBackStack("edit_dish_show_screen")
-             //   .commit()
-        })
-
-        binding.ingredientsList.adapter = adapter
-        viewModel.dish.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it.ingredients)                 ^^^^^
-            }
-        })*//*
-    }*/
-
     fun changeDish(dish: Dish): Dish {
         val nameEntered = binding.editTextDishName.text.toString()
         val portionEntered = binding.editTextDishPortion.getText().toString()
@@ -161,19 +138,11 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
     }
 
     private fun showIngredientDeletionDialog(ingredient: Ingredient) {
-        val dialog = DishDeletionDialogFragment(
+        val dialog = DishDeletionDialogFragment( // Ingredient deletion dialog fragment!!!!!
             onDeleteClicked = {
                 viewModel.removeIngredient(ingredient)
                 val toast = Toast.makeText(context, "deleted an item: ${ingredient.name}, id ${ingredient.id} ", Toast.LENGTH_SHORT).show()
-            },
-            onDismissClicked = {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, DishesFragment(), null)
-                    .setReorderingAllowed(true)
-                    .addToBackStack("edit_dish_show_screen")
-                    .commit()
-            }
-        )
+            })
         dialog.show(requireActivity().supportFragmentManager, "tag")
     }
 }

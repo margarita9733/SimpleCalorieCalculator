@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.OnConflictStrategy
 import com.hfad.simplecaloriecalculator.Dish
-import com.hfad.simplecaloriecalculator.Product
 import com.hfad.simplecaloriecalculator.database.daos.DishDao
 import com.hfad.simplecaloriecalculator.database.daos.DishProductDao
 import com.hfad.simplecaloriecalculator.database.daos.ProductDao
@@ -73,8 +71,7 @@ class EditDishViewModel(
     }
 
     //
-// обращаться к бд внутри корутины за  сущностью для объекта логики
-// внутри нее же преобразовывать в  объект логики и класть в ЛД, ЛД содержит тип объекта логики, фрагмент наблюдает за ЛД
+
     private val _dish = MutableLiveData<Dish?>(null)
     val dish: LiveData<Dish?> get() = _dish
 
@@ -95,7 +92,4 @@ class EditDishViewModel(
             )
         }
     }
-
-    // все методы асинхронные в одной корутине, возвращается один готовый объект
-    // как в с Dish в фрагменте
 }
