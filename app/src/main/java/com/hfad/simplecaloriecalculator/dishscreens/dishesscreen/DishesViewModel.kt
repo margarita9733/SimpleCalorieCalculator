@@ -28,12 +28,12 @@ class DishesViewModel(
     init {
         allDishEntities.observeForever {
             it?.let {
-                _dishes.value = getAllDishes(allDishEntities.value?: listOf())
+                getAllDishes()
             }
         }
         allDishProductEntities.observeForever {
             it?.let {
-                _dishes.value = getAllDishes(allDishEntities.value?: listOf())
+                getAllDishes()
             }
         }
     }
@@ -52,42 +52,30 @@ class DishesViewModel(
     }
 
 
-    fun getAllDishes(dishEntities: List<DishEntity>): List<Dish> {
-        Log.i("DishesVM", "getAllDishes start")
-
+    fun getAllDishes() {
+        var dishEntities = this.allDishEntities.value ?: listOf()
         var dishesToReturn: MutableList<Dish> = mutableListOf()
 
-        for (dishEntity in dishEntities) {
-            dishesToReturn.add(getDish(dishEntity))
+        var dpEntitiesList: List<DishProductEntity> = listOf()
+        var dishIngredients: MutableList<Ingredient> = mutableListOf()
+
+        viewModelScope.launch {
+            for (dishEntityItem in dishEntities) {
+                dpEntitiesList = dishProductDao.getIngredientsByDishIdSync(dishEntityItem.id)
+                for (dishProductEntityItem in dpEntitiesList) {
+                    dishIngredients.add(Ingredient(productDao.getProductByIdSync(dishProductEntityItem.productId), dishProductEntityItem.weight))
+                }
+                dishesToReturn.add(
+                    Dish(
+                        dishEntityItem.id,
+                        dishIngredients.toList(),
+                        dishEntityItem.name,
+                        dishEntityItem.defaultPortionWeight
+                    )
+                )
+            }
+            _dishes.value = dishesToReturn.toList()
         }
-        return dishesToReturn.toList()
-    }
-
-    fun getDish(dishEntity: DishEntity): Dish {
-        return Dish(
-            dishEntity.id,
-            getIngredientsList(dishEntity.id),
-            dishEntity.name,
-            dishEntity.defaultPortionWeight
-        )
-    }
-
-    fun getIngredientsList(dishId: Long): List<Ingredient> {
-
-        val ingsList: MutableList<Ingredient> = mutableListOf()
-        val dPEntities: List<DishProductEntity> =
-            dishProductDao.getDishProductsByDish(dishId).value ?: listOf()
-
-        for (entity in dPEntities) ingsList.add(getIngredient(entity))
-
-        return ingsList.toList()
-    }
-
-    fun getIngredient(dishProductE: DishProductEntity): Ingredient {
-        return Ingredient(
-            (productDao.get(dishProductE.productId)).value ?: Product(),
-            dishProductE.weight
-        )
     }
 
     fun dishToDishEntity(dish: Dish)
@@ -111,8 +99,6 @@ class DishesViewModel(
         }
 
     }
-
-
 }
 
 
