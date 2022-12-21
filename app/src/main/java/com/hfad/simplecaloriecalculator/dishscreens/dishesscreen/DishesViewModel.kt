@@ -20,18 +20,20 @@ class DishesViewModel(
 ) : ViewModel() {
 
     private val allDishEntities: LiveData<List<DishEntity>> = dishDao.getAll()
-    // private val allDishProductEntities: LiveData<List<DishProductEntity>> = dishProductDao.getAll()
+    private val allDishProductEntities: LiveData<List<DishProductEntity>> = dishProductDao.getAll()
 
     private var _dishes: MutableLiveData<List<Dish>?> = MutableLiveData(null)
     val dishes: LiveData<List<Dish>?> get() = _dishes
 
-    /*  private var _dishes_contents: MutableLiveData<List<DishProductEntity>?> = MutableLiveData(null)
-      val dishes_contents: LiveData<List<DishProductEntity>?> get() = _dishes_contents
-  */
     init {
         allDishEntities.observeForever {
             it?.let {
-                _dishes.value = getAllDishes(it)
+                _dishes.value = getAllDishes(allDishEntities.value?: listOf())
+            }
+        }
+        allDishProductEntities.observeForever {
+            it?.let {
+                _dishes.value = getAllDishes(allDishEntities.value?: listOf())
             }
         }
     }
@@ -49,12 +51,11 @@ class DishesViewModel(
         }
     }
 
-    // перенести в Use Case \/
+
     fun getAllDishes(dishEntities: List<DishEntity>): List<Dish> {
         Log.i("DishesVM", "getAllDishes start")
 
         var dishesToReturn: MutableList<Dish> = mutableListOf()
-        //val dishEntities: List<DishEntity> = dishDao.getAll().value ?: listOf()
 
         for (dishEntity in dishEntities) {
             dishesToReturn.add(getDish(dishEntity))
@@ -88,8 +89,6 @@ class DishesViewModel(
             dishProductE.weight
         )
     }
-    // ^перенести в UseCase
-    ////////////////////////////////
 
     fun dishToDishEntity(dish: Dish)
             : DishEntity = DishEntity(dish.id, dish.name, dish.defaultPortionWeight)
@@ -115,6 +114,7 @@ class DishesViewModel(
 
 
 }
+
 
 
 
