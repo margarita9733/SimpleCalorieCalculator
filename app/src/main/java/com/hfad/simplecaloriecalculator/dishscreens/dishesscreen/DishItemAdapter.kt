@@ -25,7 +25,6 @@ class DishItemAdapter(
 
     class DishItemViewHolder(val binding: DishItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-
         companion object {
             fun inflateFrom(parent: ViewGroup): DishItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)

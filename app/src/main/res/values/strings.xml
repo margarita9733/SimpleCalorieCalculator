@@ -44,5 +44,6 @@
 
     <string name="weight_placeholder">Вес %1$s г </string>
     <string name="weight">Вес:</string>
+    <string name="weight_g">Вес(грамм)</string>
 
 </resources>

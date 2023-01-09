@@ -2,10 +2,15 @@ package com.hfad.simplecaloriecalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.hfad.simplecaloriecalculator.database.CalcDatabase
 import com.hfad.simplecaloriecalculator.databinding.ActivityMainBinding
 import com.hfad.simplecaloriecalculator.dayscreen.DayFragment
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesFragment
 import com.hfad.simplecaloriecalculator.productscreens.productsscreen.ProductsFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -13,6 +18,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        CalcDatabase.getInstance(application).apply {
+            runBlocking {
+                CoroutineScope(Dispatchers.IO).launch {
+                    dishDao.deleteAllRecords()
+                    productDao.deleteAllRecords()
+                    dishProductDao.deleteAllRecords()
+
+                    productDao.insert(Product(
+                        name = "сосиска",
+                        proteins = 100.0,
+                        fats = 100.0,
+                        carbs = 100.0,
+                        calories = 200.0,
+                        portionWeight = 123.0
+                    ))
+                }
+            }
+        }
+
         _binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)

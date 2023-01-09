@@ -1,5 +1,6 @@
 package com.hfad.simplecaloriecalculator.database.daos
 
+import android.os.FileObserver.DELETE
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.hfad.simplecaloriecalculator.Dish
@@ -22,6 +23,9 @@ interface DishDao {
     @Query("SELECT * FROM dish_table ORDER BY id DESC")
     fun getAll(): LiveData<List<DishEntity>>
 
+    @Query("DELETE FROM dish_table")
+    fun deleteAllRecords()
+
     @Delete
     suspend fun deleteAll(dishList: List<DishEntity>)
 
@@ -30,6 +34,9 @@ interface DishDao {
 
     @Query("SELECT * FROM dish_table WHERE id = :dishId")
     suspend fun getDishEntityByIdSync(dishId: Long): DishEntity
+
+    @Query("SELECT * FROM dish_table WHERE dish_name = :nameToFind")
+    suspend fun getDishEntityByNameSync(nameToFind: String): DishEntity
 
 
 }

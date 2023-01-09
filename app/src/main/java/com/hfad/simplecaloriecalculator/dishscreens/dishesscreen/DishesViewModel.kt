@@ -20,7 +20,6 @@ class DishesViewModel(
 ) : ViewModel() {
 
     private val allDishEntities: LiveData<List<DishEntity>> = dishDao.getAll()
-    private val allDishProductEntities: LiveData<List<DishProductEntity>> = dishProductDao.getAll()
 
     private var _dishes: MutableLiveData<List<Dish>?> = MutableLiveData(null)
     val dishes: LiveData<List<Dish>?> get() = _dishes
@@ -28,11 +27,7 @@ class DishesViewModel(
     init {
         allDishEntities.observeForever {
             it?.let {
-                getAllDishes()
-            }
-        }
-        allDishProductEntities.observeForever {
-            it?.let {
+                Log.i("dish_error", "dish entities")
                 getAllDishes()
             }
         }
@@ -51,8 +46,7 @@ class DishesViewModel(
         }
     }
 
-
-    fun getAllDishes() {
+    fun getAllDishes() { // проверить на дублироание ингредиентов более поздних блюд в более ранние
         var dishEntities = this.allDishEntities.value ?: listOf()
         var dishesToReturn: MutableList<Dish> = mutableListOf()
 
@@ -73,6 +67,7 @@ class DishesViewModel(
                         dishEntityItem.defaultPortionWeight
                     )
                 )
+                dishIngredients = mutableListOf()
             }
             _dishes.value = dishesToReturn.toList()
         }
@@ -91,11 +86,9 @@ class DishesViewModel(
 
     fun removeDish(dish: Dish) {
         val dishEntityToDelete = dishToDishEntity(dish)
-        val dishProductItemsToDelete = dishToDPEntities(dish)
 
         viewModelScope.launch {
             dishDao.delete(dishEntityToDelete)
-            dishProductDao.deleteAll(dishProductItemsToDelete)
         }
 
     }

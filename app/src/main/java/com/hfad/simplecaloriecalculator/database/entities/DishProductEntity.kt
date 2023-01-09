@@ -3,6 +3,7 @@ package com.hfad.simplecaloriecalculator.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 import com.hfad.simplecaloriecalculator.Product
 
@@ -12,13 +13,17 @@ import com.hfad.simplecaloriecalculator.Product
         ForeignKey(
             entity = DishEntity::class,
             parentColumns = ["id"],
-            childColumns = ["dish_id"]
+            childColumns = ["dish_id"],
+            onDelete = CASCADE,
+            onUpdate = CASCADE
         ),
 
         ForeignKey(
             entity = Product::class,
             parentColumns = ["id"],
-            childColumns = ["product_id"]
+            childColumns = ["product_id"],
+            onDelete = CASCADE,
+            onUpdate = CASCADE
         )
     ]
 )

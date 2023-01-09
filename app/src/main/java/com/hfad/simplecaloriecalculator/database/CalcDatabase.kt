@@ -18,7 +18,7 @@ import com.hfad.simplecaloriecalculator.database.entities.*
         MealEntity::class,
         MealProductEntity::class,
         MealDishEntity::class
-    ], version = 7, exportSchema = false
+    ], version = 8, exportSchema = false
 )
 abstract class CalcDatabase : RoomDatabase() {
     abstract val productDao: ProductDao

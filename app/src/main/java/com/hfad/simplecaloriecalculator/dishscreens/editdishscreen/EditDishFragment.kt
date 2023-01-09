@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.hfad.simplecaloriecalculator.Dish
 import com.hfad.simplecaloriecalculator.R
 import com.hfad.simplecaloriecalculator.database.CalcDatabase
@@ -17,10 +15,8 @@ import com.hfad.simplecaloriecalculator.databinding.FragmentEditDishBinding
 import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 import com.hfad.simplecaloriecalculator.dishscreens.IngredientItemAdapter
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishDeletionDialogFragment
-import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesFragment
-import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesViewModel
+import com.hfad.simplecaloriecalculator.productscreens.ingredientinfoscreen.IngredientInfoBottomSheetDialogFragment
 import com.hfad.simplecaloriecalculator.productscreens.pickingredientscreen.PickIngredientFragment
-import kotlinx.coroutines.launch
 import java.util.*
 
 class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean) : Fragment() {
@@ -53,11 +49,8 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
             showIngredientDeletionDialog(ingredient)
         }, { ingredient ->
             val toast = Toast.makeText(context, "ingredient ${ingredient.id} tapped", Toast.LENGTH_SHORT).show()
-            /* parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, EditDishFragment(dish.id, false), null)
-                .setReorderingAllowed(true)
-               .addToBackStack("edit_dish_show_screen")
-               .commit()*/
+            val ingredientInfoBottomSheet = IngredientInfoBottomSheetDialogFragment(dishId, ingredient.id)
+            ingredientInfoBottomSheet.show(parentFragmentManager, IngredientInfoBottomSheetDialogFragment.TAG)
         })
 
         binding.ingredientsList.adapter = adapter

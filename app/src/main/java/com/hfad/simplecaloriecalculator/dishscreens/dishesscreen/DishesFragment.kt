@@ -1,6 +1,7 @@
 package com.hfad.simplecaloriecalculator.dishscreens.dishesscreen
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -47,6 +48,7 @@ class DishesFragment : Fragment() {
                     .addToBackStack("edit_dish_show_screen")
                     .commit()
                 viewModel.onNavigationEnded()
+                Log.i("dishesF", "itemId: $it")
             }
         })
 
@@ -67,6 +69,7 @@ class DishesFragment : Fragment() {
                 .setReorderingAllowed(true)
                 .addToBackStack("edit_dish_show_screen")
                 .commit()
+            val toast = Toast.makeText(context, "dish ${dish.id} tapped", Toast.LENGTH_SHORT).show()
         })
 
         binding.dishesList.adapter = adapter

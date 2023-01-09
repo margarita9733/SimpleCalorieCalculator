@@ -45,7 +45,6 @@ class EditDishViewModel(
         }
     }
 
-
     fun insertDishProductEntities(dish: Dish) {
         viewModelScope.launch {
             daoDishProduct.insertAll(dishToDPEntities(dish))
@@ -80,7 +79,7 @@ class EditDishViewModel(
         var dpEntities: List<DishProductEntity>
         var dishIngredients: MutableList<Ingredient> = mutableListOf()
         viewModelScope.launch {
-            dishEntity = daoDish.getDishEntityByIdSync(dishId)
+            dishEntity = daoDish.getDishEntityByIdSync(dishId)//?: DishEntity() // !!!
             dpEntities = daoDishProduct.getIngredientsByDishIdSync(dishId)
             for (item in dpEntities) dishIngredients.add(Ingredient(daoProduct.getProductByIdSync(item.productId), item.weight))
 

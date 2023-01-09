@@ -22,6 +22,9 @@ interface ProductDao {
     @Query("SELECT * FROM product_table ORDER BY id DESC")
     fun getAll(): LiveData<List<Product>>
 
+    @Query("DELETE FROM product_table")
+    fun deleteAllRecords()
+
     @Delete
     suspend fun deleteAll(productList: List<Product>)
 

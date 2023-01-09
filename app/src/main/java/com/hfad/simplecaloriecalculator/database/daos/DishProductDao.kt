@@ -25,6 +25,9 @@ interface DishProductDao {
     @Query("SELECT * FROM dish_product_table  WHERE dish_id = :dishId ORDER BY id DESC")
     fun getDishProductsByDish(dishId: Long): LiveData<List<DishProductEntity>>
 
+    @Query("DELETE FROM dish_product_table")
+    fun deleteAllRecords()
+
     @Delete
     suspend fun deleteAll(dishProductList: List<DishProductEntity>)
 
