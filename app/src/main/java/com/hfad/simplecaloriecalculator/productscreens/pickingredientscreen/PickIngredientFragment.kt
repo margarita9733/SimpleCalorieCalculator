@@ -41,7 +41,7 @@ class PickIngredientFragment(var dishId: Long) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = ProductAsIngItemAdapter { ingredient ->
-            Toast.makeText(context, "item ${ingredient.name} ${ingredient.id} clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "item ${ingredient.name} ${ingredient.id} tapped", Toast.LENGTH_SHORT).show()
 
             val modalBottomSheet = IngredientWeightBottomSheetFragment(dishId, ingredient.id)
             modalBottomSheet.show(parentFragmentManager, IngredientWeightBottomSheetFragment.TAG)

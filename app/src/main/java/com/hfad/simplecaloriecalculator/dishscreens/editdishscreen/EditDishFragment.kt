@@ -15,6 +15,7 @@ import com.hfad.simplecaloriecalculator.databinding.FragmentEditDishBinding
 import com.hfad.simplecaloriecalculator.dishscreens.Ingredient
 import com.hfad.simplecaloriecalculator.dishscreens.IngredientItemAdapter
 import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishDeletionDialogFragment
+import com.hfad.simplecaloriecalculator.dishscreens.dishesscreen.DishesFragment
 import com.hfad.simplecaloriecalculator.productscreens.ingredientinfoscreen.IngredientInfoBottomSheetDialogFragment
 import com.hfad.simplecaloriecalculator.productscreens.pickingredientscreen.PickIngredientFragment
 import java.util.*
@@ -75,7 +76,7 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
             viewModel.updateDishEntity(updatedDish)                 //
             viewModel.deleteDishProductEntities(dishToDisplay)      // обновить таблицы в бд
             viewModel.insertDishProductEntities(updatedDish)        //
-            val toast = Toast.makeText(context, "changes saved oldId${dishToDisplay.id} newId${updatedDish.id}", Toast.LENGTH_SHORT).show()
+            val toast = Toast.makeText(context, "saved dish id${updatedDish.id}", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
         }
 
@@ -84,11 +85,19 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
                 viewModel.deleteDishEntity(dishToDisplay)
                 parentFragmentManager.popBackStack()
             } else {
-                parentFragmentManager.popBackStack()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, DishesFragment(), null)
+                    .setReorderingAllowed(true)
+                    .addToBackStack("dishes_screen")
+                    .commit()
             }
         }
 
         binding.fabGoToSelectProductScreen.setOnClickListener {
+            val updatedDish = changeDish(dishToDisplay)
+            viewModel.updateDishEntity(updatedDish)                 // обновить таблицу в бд - сохранить название и размер порции
+            val toast = Toast.makeText(context, "saved dish id${updatedDish.id}", Toast.LENGTH_SHORT).show()
+
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, PickIngredientFragment(dishToDisplay.id), null)
                 .setReorderingAllowed(true)

@@ -18,8 +18,6 @@
     <string name="button_cancel">Отмена</string>
     <string name="text_product_parameters">Параметры указываются на 100 грамм продукта</string>
     <string name="product_default_name">Продукт</string>
-    <string name="deletion_confirmation">Удалить?</string>
-    <string name="delete">удалить</string>
     <string name="day_calories_consumed_of_max">Калории: %1s / %2s</string>
     <string name="day_calories_available">Доступно: %1$s</string>
     <string name="day_calories_excess">Перебор: %1$s</string>
@@ -27,6 +25,12 @@
     <string name="bottom_menu_products">Продукты</string>
     <string name="bottom_menu_dishes">Блюда</string>
     <string name="time_insnt_defined">Время не установлено</string>
+
+    <string name="deletion_confirmation">Удалить?</string>
+    <string name="product_deletion_confirmation">Удалить продукт?</string>
+    <string name="dish_deletion_confirmation">Удалить блюдо?</string>
+    <string name="ingredient_deletion_confirmation">Удалить ингредиент из блюда?</string>
+    <string name="delete">удалить</string>
 
     <string name="proteins_letter_placeholder">Б: %1$s г </string>
     <string name="fats_letter_placeholder">Ж: %1$s г</string>

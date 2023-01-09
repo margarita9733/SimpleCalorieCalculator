@@ -17,7 +17,7 @@ class ProductDeletionDialogFragment(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
-            .setMessage(getString(R.string.deletion_confirmation))
+            .setMessage(getString(R.string.product_deletion_confirmation))
             .setPositiveButton(R.string.delete) { _, _ ->
                 onDeleteClicked()
             }

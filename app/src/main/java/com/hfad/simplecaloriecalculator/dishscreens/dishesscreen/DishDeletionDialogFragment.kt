@@ -17,7 +17,7 @@ class DishDeletionDialogFragment(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
-            .setMessage(getString(R.string.deletion_confirmation))
+            .setMessage(getString(R.string.dish_deletion_confirmation))
             //.setView(R.layout.fragment_ingredient_weight_dialog)
             .setPositiveButton(R.string.delete) { _, _ ->
                 onDeleteClicked()

@@ -41,11 +41,11 @@ class IngredientWeightBottomSheetFragment(val dishId: Long, val productId: Long)
             val iWeight = if (weightEntered == "") 0.0 else weightEntered.toDouble()
             viewModel.addIngredientToDish(dishId, productId, iWeight)
             dismiss()
-            /*parentFragmentManager.beginTransaction()
+            parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, EditDishFragment(dishId, false), null)
                 .setReorderingAllowed(true)
                 .addToBackStack("edit_dish_show_screen")
-                .commit()*/
+                .commit()
         }
 
         return view

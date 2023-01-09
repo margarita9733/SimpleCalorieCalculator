@@ -46,7 +46,7 @@ class ProductItemAdapter(
             binding.productPortionCalories.text = "ккал: " + item.caloriesPerPortion.format()
             binding.productPortionWeight.text = "Порция: " + item.portionWeight.format() + " г"
             binding.productOptionsButton.setOnClickListener { buttonListener(item) }
-            binding.root.setOnClickListener /*{ Toast.makeText(binding.root.context, "clicked ${item.name}", Toast.LENGTH_SHORT).show() } */ { itemLstnr(item) }
+            binding.root.setOnClickListener /*{ Toast.makeText(binding.root.context, "tapped ${item.name}", Toast.LENGTH_SHORT).show() } */ { itemLstnr(item) }
         }
 
         fun Double.format() = "%.2f".format(this)
