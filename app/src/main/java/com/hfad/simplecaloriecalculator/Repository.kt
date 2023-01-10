@@ -14,6 +14,10 @@ class Repository(dataBase: CalcDatabase) {
         Log.i("VM", "product added")
     }
 
+    suspend fun updateProductInBase(product: Product) {
+        productDao.update(product)
+    }
+
     suspend fun removeProductFromBase(product: Product) {
         productDao.delete(product)
     }

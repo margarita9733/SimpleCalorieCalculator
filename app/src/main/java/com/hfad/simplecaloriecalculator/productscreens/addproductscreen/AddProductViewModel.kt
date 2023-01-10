@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class AddProductViewModel(val dataBase: CalcDatabase) : ViewModel() {
 
-    val repository: Repository = Repository(dataBase)
+    private val repository: Repository = Repository(dataBase)
 
     fun addProduct(product: Product) {
         viewModelScope.launch { repository.addProductToBase(product) }

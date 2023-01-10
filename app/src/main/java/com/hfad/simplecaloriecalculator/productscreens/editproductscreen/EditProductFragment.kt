@@ -16,8 +16,8 @@ class EditProductFragment(product: Product) : Fragment() {
 
     private var _binding: FragmentEditProductBinding? = null
     private val binding get() = _binding!!
-    val productToDisplay: Product = product
 
+    val productToDisplay: Product = product
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +28,12 @@ class EditProductFragment(product: Product) : Fragment() {
         val view = binding.root
 
         val application = requireNotNull(this.activity).application
-        val dao = CalcDatabase.getInstance(application).productDao
-        val viewModelFactory = EditProductViewModelFactory(dao)
+        val dataBase = CalcDatabase.getInstance(application)
+
+        val viewModelFactory = EditProductViewModelFactory(dataBase)
         val viewModel = ViewModelProvider(
-            this, viewModelFactory).get(EditProductViewModel::class.java)
+            this, viewModelFactory
+        ).get(EditProductViewModel::class.java)
 
         binding.editTextProductName.setText(productToDisplay.name)
         binding.editTextProductProteins.setText((productToDisplay.proteins * 100).format())
@@ -56,7 +58,6 @@ class EditProductFragment(product: Product) : Fragment() {
     }
 
     fun changeProduct(): Product {
-
         val nameEntered = binding.editTextProductName.getText().toString()
         val proteinsEntered = binding.editTextProductProteins.getText().toString()
         val fatsEntered = binding.editTextProductFats.getText().toString()
@@ -108,7 +109,7 @@ class EditProductFragment(product: Product) : Fragment() {
         return Product(productToDisplay.id, pName, pProteins, pFats, pCarbs, pKcal, pPortion)
     }
 
-    fun Double.format() = "%.2f".format(Locale.US,this)
+    fun Double.format() = "%.2f".format(Locale.US, this)
     //val totalCaloriesPerHundredFormatted = "%.2f".format(totalCaloriesPerHundred)
     //Locale.US
 }

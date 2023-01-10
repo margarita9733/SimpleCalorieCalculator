@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class ProductsViewModel(val dataBase: CalcDatabase) : ViewModel() {
     // before:  val food = dao.getAll()
 
-    val repository: Repository = Repository(dataBase)
+    private val repository: Repository = Repository(dataBase)
 
     private var _products: MutableLiveData<List<Product>?> = MutableLiveData(null)
     val products: LiveData<List<Product>?> get() = _products
