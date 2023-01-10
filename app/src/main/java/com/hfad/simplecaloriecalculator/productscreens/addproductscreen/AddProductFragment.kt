@@ -25,21 +25,19 @@ class AddProductFragment : Fragment() {
         val view = binding.root
 
         val application = requireNotNull(this.activity).application
-        val dao = CalcDatabase.getInstance(application).productDao
-        val viewModelFactory = AddProductViewModelFactory(dao)
+        val dataBase = CalcDatabase.getInstance(application)
+
+        val viewModelFactory = AddProductViewModelFactory(dataBase)
         val viewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(AddProductViewModel::class.java)
 
         binding.buttonAddProduct.setOnClickListener {
-            var i = createProduct()
-            Toast.makeText(
-                context, "${i.name} ${i.id} ${i.proteins}p " +
-                        " ${i.fats}f ${i.carbs}c ${i.calories}Kcal ${i.portionWeight}portion " +
-                        "created ", Toast.LENGTH_LONG
-            ).show()
 
-            viewModel.addToList(i)
+            viewModel.addProduct(createProduct())
+            Toast.makeText(
+                context, "product created ", Toast.LENGTH_SHORT
+            ).show()
             parentFragmentManager.popBackStack()
         }
 

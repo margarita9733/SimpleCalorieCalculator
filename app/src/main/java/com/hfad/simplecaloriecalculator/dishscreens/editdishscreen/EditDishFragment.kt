@@ -77,7 +77,12 @@ class EditDishFragment(private val dishId: Long, private val dishIsNew: Boolean)
             viewModel.deleteDishProductEntities(dishToDisplay)      // обновить таблицы в бд
             viewModel.insertDishProductEntities(updatedDish)        //
             val toast = Toast.makeText(context, "saved dish id${updatedDish.id}", Toast.LENGTH_SHORT).show()
-            parentFragmentManager.popBackStack()
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, DishesFragment(), null)
+                .setReorderingAllowed(true)
+                .addToBackStack("dishes_screen")
+                .commit()
         }
 
         binding.buttonCancel.setOnClickListener {

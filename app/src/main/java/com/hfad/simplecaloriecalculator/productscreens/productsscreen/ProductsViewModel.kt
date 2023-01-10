@@ -28,10 +28,6 @@ class ProductsViewModel(val dataBase: CalcDatabase) : ViewModel() {
         }
     }
 
-    fun addProduct(product: Product) {
-        viewModelScope.launch { repository.addProductToBase(product) }
-    }
-
     fun deleteProduct(product: Product) {
         viewModelScope.launch { repository.removeProductFromBase(product) }
     }

@@ -4,12 +4,17 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.simplecaloriecalculator.Product
+import com.hfad.simplecaloriecalculator.Repository
+import com.hfad.simplecaloriecalculator.database.CalcDatabase
 import com.hfad.simplecaloriecalculator.database.daos.ProductDao
 import kotlinx.coroutines.launch
 
-class AddProductViewModel(val dao: ProductDao) : ViewModel() {
-    fun addToList(product: Product) {
-        viewModelScope.launch { dao.insert(product) }
+class AddProductViewModel(val dataBase: CalcDatabase) : ViewModel() {
+
+    val repository: Repository = Repository(dataBase)
+
+    fun addProduct(product: Product) {
+        viewModelScope.launch { repository.addProductToBase(product) }
         Log.i("AddProductVM", "product added")
     }
 
