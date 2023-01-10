@@ -8,5 +8,4 @@ class PickIngredientViewModel(val productDao: ProductDao) : ViewModel() {
     val products = productDao.getAll()
 
 
-
 }

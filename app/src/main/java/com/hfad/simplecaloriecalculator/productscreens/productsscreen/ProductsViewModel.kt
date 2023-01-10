@@ -1,34 +1,42 @@
 package com.hfad.simplecaloriecalculator.productscreens.productsscreen
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.hfad.simplecaloriecalculator.Product
+import com.hfad.simplecaloriecalculator.R
+import com.hfad.simplecaloriecalculator.Repository
+import com.hfad.simplecaloriecalculator.database.CalcDatabase
 import com.hfad.simplecaloriecalculator.database.daos.ProductDao
+import com.hfad.simplecaloriecalculator.dishscreens.editdishscreen.EditDishFragment
 import kotlinx.coroutines.launch
 
-class ProductsViewModel(val dao: ProductDao) : ViewModel() {
+class ProductsViewModel(val dataBase: CalcDatabase) : ViewModel() {
+    // before:  val food = dao.getAll()
 
-    val food = dao.getAll()
+    val repository: Repository = Repository(dataBase)
 
-    fun addToList(product: Product) {
-        viewModelScope.launch { dao.insert(product) }
-        Log.i("VM", "product added")
-    }
+    private var _products: MutableLiveData<List<Product>?> = MutableLiveData(null)
+    val products: LiveData<List<Product>?> get() = _products
 
-    fun removeFromList(product: Product) {
-        viewModelScope.launch { dao.delete(product) }
-    }
+    init {
+        repository.productsBase.observeForever {
+            it?.let {
+                _products.value = it
+                Log.i("productsVM", "products list updated")
 
-    fun clearBase() {
-        viewModelScope.launch {
-            val entries = dao.getAll().value
-            if (entries != null) for (entry in entries) {
-                removeFromList(entry)
             }
         }
     }
+
+    fun addProduct(product: Product) {
+        viewModelScope.launch { repository.addProductToBase(product) }
+    }
+
+    fun deleteProduct(product: Product) {
+        viewModelScope.launch { repository.removeProductFromBase(product) }
+    }
 }
+
 /*
 
 private var products: List<Product> = listOf<Product>(

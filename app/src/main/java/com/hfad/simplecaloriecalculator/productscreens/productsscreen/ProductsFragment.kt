@@ -30,8 +30,9 @@ class ProductsFragment : Fragment() {
         val view = binding.root
 
         val application = requireNotNull(this.activity).application
-        val dao = CalcDatabase.getInstance(application).productDao
-        val viewModelFactory = ProductsViewModelFactory(dao)
+        val dataBase = CalcDatabase.getInstance(application)
+
+        val viewModelFactory = ProductsViewModelFactory(dataBase)
         viewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(ProductsViewModel::class.java)
@@ -62,7 +63,7 @@ class ProductsFragment : Fragment() {
         })
 
         binding.productsList.adapter = adapter
-        viewModel.food.observe(viewLifecycleOwner, Observer {
+        viewModel.products.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
@@ -77,7 +78,7 @@ class ProductsFragment : Fragment() {
     private fun showProductDeletionDialog(product: Product) {
         val dialog = ProductDeletionDialogFragment(
             onDeleteClicked = {
-                viewModel.removeFromList(product)
+                viewModel.deleteProduct(product)
                 val toast = Toast.makeText(context, "deleted an item: ${product.name} ${product.id} ", Toast.LENGTH_SHORT).show()
             })
         dialog.show(requireActivity().supportFragmentManager, "tag")
